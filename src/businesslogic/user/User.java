@@ -1,15 +1,13 @@
 package businesslogic.user;
 
+import businesslogic.event.EventInfo;
 import javafx.collections.FXCollections;
 import persistence.PersistenceManager;
 import persistence.ResultHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class User {
 
@@ -20,6 +18,7 @@ public class User {
     private int id;
     private String username;
     private Set<Role> roles;
+    private List<EventInfo> assignedEvents;
 
     public User() {
         id = 0;
@@ -41,6 +40,10 @@ public class User {
 
     public int getId() {
         return this.id;
+    }
+
+    public List<EventInfo> getAssignedEvents() {
+        return assignedEvents;
     }
 
     public String toString() {

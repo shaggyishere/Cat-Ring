@@ -11,4 +11,21 @@ public class KitchenTask {
     private Procedure procedure;
     private Turn turn;
     private Cook cook;
+
+    public KitchenTask(Procedure proc) {
+        this.procedure = proc;
+        this.completed = false;
+    }
+
+    @Override
+    public String toString() {
+        return "KitchenTask{" +
+                "timing='" + timing + '\'' +
+                ", quantity='" + quantity + '\'' +
+                ", completed=" + completed +
+                ", procedure=" + procedure +
+                ", turn=" + turn +
+                ", cook=" + cook +
+                '}';
+    }
 }

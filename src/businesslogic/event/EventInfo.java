@@ -20,6 +20,9 @@ public class EventInfo implements EventItemInfo {
 
     private ObservableList<ServiceInfo> services;
 
+    public EventInfo() {
+    }
+
     public EventInfo(String name) {
         this.name = name;
         id = 0;
@@ -57,5 +60,39 @@ public class EventInfo implements EventItemInfo {
             e.services = ServiceInfo.loadServiceInfoForEvent(e.id);
         }
         return all;
+    }
+
+    public static EventInfo getEventByName(String name) {
+        EventInfo e = new EventInfo();
+        String query = String.format("SELECT * FROM Events WHERE name = '%s'", name);
+        PersistenceManager.executeQuery(query, new ResultHandler() {
+            @Override
+            public void handle(ResultSet rs) throws SQLException {
+                String n = rs.getString("name");
+                e.name = n;
+                e.id = rs.getInt("id");
+                e.dateStart = rs.getDate("date_start");
+                e.dateEnd = rs.getDate("date_end");
+                e.participants = rs.getInt("expected_participants");
+                int org = rs.getInt("organizer_id");
+                e.organizer = User.loadUserById(org);
+            }
+        });
+
+        e.services = ServiceInfo.loadServiceInfoForEvent(e.id);
+
+        return e;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public User getOrganizer() {
+        return organizer;
     }
 }

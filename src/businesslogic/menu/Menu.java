@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Menu {
@@ -493,6 +494,10 @@ public class Menu {
         return FXCollections.observableArrayList(loadedMenus.values());
     }
 
+    public static Menu getMenuById(int id) {
+        return loadAllMenus().stream().filter(menu -> menu.id == id).findFirst().get();
+    }
+
     public static void saveSectionOrder(Menu m) {
         String upd = "UPDATE MenuSections SET position = ? WHERE id = ?";
         PersistenceManager.executeBatchUpdate(upd, m.sections.size(), new BatchUpdateHandler() {
@@ -524,5 +529,20 @@ public class Menu {
                 // no generated ids to handle
             }
         });
+    }
+
+    public List<Recipe> getRecipes() {
+        List<Recipe> recipes = new ArrayList<>();
+
+        for (MenuItem item : freeItems) {
+            recipes.add(item.getItemRecipe());
+        }
+
+        for (Section section : sections) {
+            List<Recipe> sectionRecipes = section.getItems().stream().map(MenuItem::getItemRecipe).toList();
+            recipes.addAll(sectionRecipes);
+        }
+
+        return recipes;
     }
 }
