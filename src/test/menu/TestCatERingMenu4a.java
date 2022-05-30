@@ -1,3 +1,5 @@
+package test.menu;
+
 import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
 import businesslogic.menu.Menu;
@@ -6,7 +8,7 @@ import businesslogic.menu.Section;
 import businesslogic.recipe.Recipe;
 import javafx.collections.ObservableList;
 
-public class TestCatERing4c {
+public class TestCatERingMenu4a {
     public static void main(String[] args) {
         try {
             /* System.out.println("TEST DATABASE CONNECTION");
@@ -28,10 +30,11 @@ public class TestCatERing4c {
             MenuItem freeit = CatERing.getInstance().getMenuManager().insertItem(recipes.get(4));
             System.out.println(m.testString());
 
-            System.out.println("\nTEST REMOVE ITEM");
-            CatERing.getInstance().getMenuManager().deleteItem(it1);
-            CatERing.getInstance().getMenuManager().deleteItem(it2);
-            CatERing.getInstance().getMenuManager().deleteItem(freeit);
+            System.out.println("\nTEST CHANGE ITEM SECTION");
+            CatERing.getInstance().getMenuManager().assignItemToSection(it1, secondi);
+            CatERing.getInstance().getMenuManager().assignItemToSection(it2, primi);
+            CatERing.getInstance().getMenuManager().assignItemToSection(it3);
+            CatERing.getInstance().getMenuManager().assignItemToSection(freeit, antipasti);
             System.out.println(m.testString());
 
         } catch (UseCaseLogicException ex) {

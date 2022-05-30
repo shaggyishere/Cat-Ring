@@ -1,17 +1,14 @@
+package test.menu;
+
 import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
-import businesslogic.event.EventInfo;
-import businesslogic.event.ServiceInfo;
 import businesslogic.menu.Menu;
 import businesslogic.menu.MenuException;
 import businesslogic.menu.Section;
 import businesslogic.recipe.Recipe;
 import javafx.collections.ObservableList;
 
-import java.util.Arrays;
-import java.util.Map;
-
-public class TestCatERing1b {
+public class TestCatERingMenu1b {
     public static void main(String[] args) {
         try {
             /* System.out.println("TEST DATABASE CONNECTION");
