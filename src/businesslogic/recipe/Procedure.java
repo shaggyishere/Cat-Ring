@@ -3,15 +3,33 @@ package businesslogic.recipe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Procedure {
-    //this method extract all the procedures from the recipe list passed by argument
-    public static List<Procedure> retrieveRecipeToPrepare(List<Recipe> recipesToExtract) {
-        List<Procedure> procedures = new ArrayList<>();
+public abstract class Procedure {
+	private List <ProcedureIngredient> ingredients;
 
-        //TODO: search inside the recipe's ingredient the preparations used and add to procedure list
-        for (Recipe recipe : recipesToExtract) {
-            procedures.add(recipe);
-        }
-        return procedures;
-    }
+	// TODO: volendo costruttore da riempire un po' almeno per i test (es. titolo, qlc)
+	public Procedure(List<ProcedureIngredient> ingredients) {
+		this.ingredients = ingredients;
+	}
+
+	public List<ProcedureIngredient> getIngredients() {
+		return ingredients;
+	}
+
+	//this method extract all the procedures from the recipe list passed by argument
+	public static List<Procedure> retrieveProceduresToPrepare(List<Recipe> recipesToExtract) {
+		List<Procedure> procedures = new ArrayList<>(recipesToExtract);
+
+		for (Recipe recipe: recipesToExtract){
+			List <ProcedureIngredient> ingredientsRecipe = recipe.getIngredients();
+			if (ingredientsRecipe != null){
+				for (ProcedureIngredient procIng: ingredientsRecipe){
+					Ingredient ing = procIng.getIngredient();
+					if (ing instanceof Preparation)
+						procedures.add((Preparation) ing);
+				}
+			}
+		}
+
+		return procedures;
+	}
 }
