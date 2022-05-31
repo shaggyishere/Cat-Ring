@@ -2,7 +2,7 @@ package businesslogic.menu;
 
 import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
-import businesslogic.recipe.Recipe;
+import businesslogic.procedure.Recipe;
 import businesslogic.user.User;
 import javafx.collections.ObservableList;
 
@@ -195,7 +195,7 @@ public class MenuManager {
         this.notifyItemDescriptionChanged(mi);
     }
 
-    public void deleteItem(MenuItem mi) throws  UseCaseLogicException {
+    public void deleteItem(MenuItem mi) throws UseCaseLogicException {
         if (currentMenu == null) throw new UseCaseLogicException();
         Section sec = null;
         try {

@@ -7,7 +7,7 @@ import businesslogic.event.ServiceInfo;
 import businesslogic.kitchentask.KitchenSheet;
 import javafx.collections.ObservableList;
 
-public class TestCatERingKitchenTask {
+public class TestCatERingKitchenTask1a {
     public static void main(String[] args) {
         //Menu m = CatERing.getInstance().getMenuManager().createMenu("Menu Pinco Pallino");
         System.out.println("TEST FAKE LOGIN");
@@ -22,21 +22,13 @@ public class TestCatERingKitchenTask {
         ObservableList<ServiceInfo> serviceInfos = ServiceInfo.loadServiceInfoForEvent(event.getId());
         System.out.println(serviceInfos);
 
-        try {
-            System.out.println("\nTEST CREATE SHEET");
-            KitchenSheet sheet = CatERing.getInstance().getKitchenTaskManager().createKitchenSheet("Primo foglio di prova", event, serviceInfos.stream().findFirst().get());
-            System.out.println(sheet);
-
-            System.out.println("\nTEST ADD KITCHEN TASK");
-            // TODO: andare a prendere le ricette/preparazioni dal ricettario e aggiungerne una
-//            KitchenTask preparePizza = CatERing.getInstance().getKitchenTaskManager().addKitchenTask(new Preparation());
-//            KitchenTask prepareSpaghetti = CatERing.getInstance().getKitchenTaskManager().addKitchenTask(new Recipe("pizza"));
-            System.out.println(sheet);
-
-        } catch (UseCaseLogicException e) {
-        System.out.println("Errore di logica nello use case");
-    }
-
-
+        // TODO
+//        try {
+//            System.out.println("\nTEST CHOOSE SHEET");
+//            KitchenSheet sheet = CatERing.getInstance().getKtMgr().chooseKitchenSheet("Primo foglio di prova", event, serviceInfos.stream().findFirst().get());
+//            System.out.println(sheet);
+//        } catch (UseCaseLogicException e) {
+//            System.out.println("Errore di caso d'uso");
+//        }
     }
 }

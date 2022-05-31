@@ -1,14 +1,18 @@
-package businesslogic.recipe;
+package businesslogic.procedure;
+
+import businesslogic.kitchentask.KitchenTask;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Procedure {
+	private List <KitchenTask> assignedInTasks;
 	private List <ProcedureIngredient> ingredients;
 
 	// TODO: volendo costruttore da riempire un po' almeno per i test (es. titolo, qlc)
-	public Procedure(List<ProcedureIngredient> ingredients) {
-		this.ingredients = ingredients;
+	public Procedure() {
+		this.ingredients = new ArrayList<>();
+		this.assignedInTasks = new ArrayList<>();
 	}
 
 	public List<ProcedureIngredient> getIngredients() {
@@ -32,4 +36,13 @@ public abstract class Procedure {
 
 		return procedures;
 	}
+
+	public void addAssignedTask(KitchenTask task){
+		this.assignedInTasks.add(task);
+	}
+
+	public void removeAssignedTask(KitchenTask task){
+		this.assignedInTasks.remove(task);
+	}
+
 }

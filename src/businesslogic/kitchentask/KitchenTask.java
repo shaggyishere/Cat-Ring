@@ -1,100 +1,68 @@
 package businesslogic.kitchentask;
 
-import businesslogic.recipe.Procedure;
+import businesslogic.menu.MenuItem;
+import businesslogic.procedure.Procedure;
 import businesslogic.turn.Turn;
 import businesslogic.user.Cook;
 
 public class KitchenTask {
-    private String timing;
-    private String quantity;
-    private boolean completed;
-    private Procedure procedure;
-    private Turn turn;
-    private Cook cook;
+	private String timing;
+	private String quantity;
+	private boolean completed;
+	private Procedure procedure;
+	private Turn turn;
+	private Cook cook;
 
-    public KitchenTask(Procedure proc) {
-        this.procedure = proc;
-        this.completed = false;
-    }
+	public KitchenTask(Procedure proc) {
+		this.procedure = proc;
+		this.completed = false;
+	}
 
-    public void assign(KitchenTask task){
+	public void assign(KitchenTask task, Turn turn, Cook cook, String timing, String quantity){
+		if (turn == null || !turn.isCompleted() || cook != null && cook.availableFor(turn)){
+			if (turn != null)
+				this.turn = turn;
+			if (cook != null)
+				this.cook = cook;
+			if (timing != null)
+				this.timing = timing;
+			if (quantity != null)
+				this.quantity = quantity;
+		}
+	}
 
-    }
+	public void setCompletedTask(){
 
-    public void assign(KitchenTask task, Turn turn){
-
-    }
-
-    public void assign(KitchenTask task, Cook cook){
-
-    }
-
-    public void assignTiming(KitchenTask task, String timing){
-
-    }
-
-    public void assignQuantity(KitchenTask task, String quantity){
-
-    }
-
-    public void assign(KitchenTask task, Turn turn, Cook cook){
-
-    }
-
-    public void assignTiming(KitchenTask task, Turn turn, String timing){
-
-    }
-
-    public void assignQuantity(KitchenTask task, Turn turn, String quantity){
-
-    }
-
-    public void assignTiming(KitchenTask task, Cook cook, String timing){
-
-    }
-
-    public void assignQuantity(KitchenTask task, Cook cook, String quantity){
-
-    }
-
-    public void assign(KitchenTask task, String timing, String quantity){
-
-    }
-
-    public void assignTiming(KitchenTask task, Turn turn, Cook cook, String timing){
-
-    }
-
-    public void assignQuantity(KitchenTask task, Turn turn, Cook cook, String quantity){
-
-    }
-
-    public void assign(KitchenTask task, Turn turn, String timing, String quantity){
-
-    }
-
-    public void assign(KitchenTask task, Cook cook, String timing, String quantity){
-
-    }
-
-    public void assign(KitchenTask task, Turn turn, Cook cook, String timing, String quantity){
-
-    }
-
-    public void setCompletedTask(){
-
-    }
+	}
 
 
-    @Override
-    public String toString() {
-        return "KitchenTask{" +
-                "timing='" + timing + '\'' +
-                ", quantity='" + quantity + '\'' +
-                ", completed=" + completed +
-                ", procedure=" + procedure +
-                ", turn=" + turn +
-                ", cook=" + cook +
-                '}';
-    }
+	// STATIC METHODS FOR PERSISTENCE
+	public static void addTask(KitchenSheet sheet, KitchenTask taskToAdd){
+		//TODO: qui insert
+	}
+
+	public static void deleteTask(KitchenTask task) {
+		//TODO: qui delete
+	}
+
+	public static void assignTask(KitchenSheet sheet, KitchenTask task) {
+		//TODO: qui update
+	}
+
+
+	public Procedure getProcedure() {
+		return procedure;
+	}
+
+	@Override
+	public String toString() {
+		return "KitchenTask{" +
+				"timing='" + timing + '\'' +
+				", quantity='" + quantity + '\'' +
+				", completed=" + completed +
+				", procedure=" + procedure +
+				", turn=" + turn +
+				", cook=" + cook +
+				'}';
+	}
 }

@@ -1,16 +1,11 @@
 package persistence;
 
-import businesslogic.kitchentask.KitchenSheet;
-import businesslogic.kitchentask.KitchenTask;
-import businesslogic.kitchentask.KitchenTaskEventReceiver;
 import businesslogic.menu.Menu;
 import businesslogic.menu.MenuEventReceiver;
 import businesslogic.menu.MenuItem;
 import businesslogic.menu.Section;
-import businesslogic.recipe.Procedure;
-import businesslogic.turn.Turn;
 
-public class MenuPersistence implements MenuEventReceiver, KitchenTaskEventReceiver {
+public class MenuPersistence implements MenuEventReceiver {
     // MenuEventReceiver methods
     @Override
     public void updateMenuCreated(Menu m) {
@@ -93,42 +88,5 @@ public class MenuPersistence implements MenuEventReceiver, KitchenTaskEventRecei
         if (sec != null) {
             Section.saveItemOrder(sec);
         } else Menu.saveFreeItemOrder(m);
-    }
-
-
-    // KitchenTaskEventReceiver methods
-    @Override
-    public void updateSheetCreated(KitchenSheet sheet) {
-        KitchenSheet.saveNewSheet(sheet);
-    }
-
-    @Override
-    public void updateTaskAdded(Procedure proc) {
-
-    }
-
-    @Override
-    public void updateTaskDeleted(KitchenTask task) {
-
-    }
-
-    @Override
-    public void updateSheetRestored(KitchenSheet sheet) {
-
-    }
-
-    @Override
-    public void updateTaskPositionChanged(KitchenTask task, int position) {
-
-    }
-
-    @Override
-    public void updateTaskCompleted(KitchenSheet sheet, KitchenTask task) {
-
-    }
-
-    @Override
-    public void updateTurnCompleteness(Turn turn, boolean isComplete) {
-
     }
 }

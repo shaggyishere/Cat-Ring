@@ -1,4 +1,4 @@
-package businesslogic.recipe;
+package businesslogic.procedure;
 
 public class ProcedureIngredient {
 	private String quantity;
