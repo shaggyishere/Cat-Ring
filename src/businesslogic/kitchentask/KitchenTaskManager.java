@@ -4,9 +4,10 @@ import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
 import businesslogic.event.EventInfo;
 import businesslogic.event.ServiceInfo;
-import businesslogic.menu.MenuItem;
 import businesslogic.procedure.Procedure;
 import businesslogic.turn.Turn;
+import businesslogic.turn.TurnManager;
+import businesslogic.turn.TurnTable;
 import businesslogic.user.Cook;
 import businesslogic.user.User;
 
@@ -86,10 +87,12 @@ public class KitchenTaskManager {
 		this.notifyTasksRearranged(task, position);
 	}
 
-	// DUBBIO: giusto metterlo qui? Perché loro il getRecipeBook (che sarebbe getProcedureBook) NON l'hanno messo nel MenuMagager
-	public List<Turn> getTurnTable(){
-		return null;
-	}
+	// DUBBIO: io non lo metterei qui, ma nel TurnManager (Anche perché loro il getProcedureBook NON l'hanno messo nel MenuMagager, ma nel ProcedureManager)
+//	public List<Turn> getTurnTable(){
+//		TurnManager turnMgr = CatERing.getInstance().getTurnManager();
+//		TurnTable tt = turnMgr.getTurnTable();
+//		return null;
+//	}
 
 	public void assignTask(KitchenTask task, Turn turn, Cook cook, String timing, String quantity) throws UseCaseLogicException {
 		if (this.currentSheet == null || ! this.currentSheet.getKitchenTasks().contains(task))
@@ -158,14 +161,18 @@ public class KitchenTaskManager {
 		this.assignTask(task, null, cook, timing, quantity);
 	}
 
-	public void specifyCompletedTask(KitchenTask task){
-
+	public void specifyCompletedTask(KitchenTask task) throws UseCaseLogicException {
+		if (this.currentSheet == null || ! this.currentSheet.getKitchenTasks().contains(task))
+			throw new UseCaseLogicException();
+		this.currentSheet.specifyCompletedTask(task);
+		this.notifyTaskCompleted(task);
 	}
 
 	public void specifyTurnCompleteness(Turn turn, boolean isComplete){
-
+		TurnManager turnMgr = CatERing.getInstance().getTurnManager();
+		turnMgr.specifyTurnCompleteness(turn, isComplete);
+		this.notifyTurnCompletenessChanged(turn, isComplete);
 	}
-
 
 	private void notifySheetCreated(KitchenSheet sheet) {
 		for (KitchenTaskEventReceiver eventReceiver : eventReceivers) {
@@ -203,12 +210,16 @@ public class KitchenTaskManager {
 		}
 	}
 
-	private void notifyTaskCompleted(KitchenSheet sheet, KitchenTask task){
-
+	private void notifyTaskCompleted(KitchenTask task){
+		for (KitchenTaskEventReceiver eventReceiver : eventReceivers) {
+			eventReceiver.updateTaskCompleted(this.currentSheet, task);
+		}
 	}
 
 	private void notifyTurnCompletenessChanged(Turn turn, boolean isComplete){
-
+		for (KitchenTaskEventReceiver eventReceiver : eventReceivers) {
+			eventReceiver.updateTurnCompleteness(this.currentSheet, turn, isComplete);
+		}
 	}
 
 

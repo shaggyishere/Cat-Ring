@@ -32,7 +32,7 @@ public class KitchenTask {
 	}
 
 	public void setCompletedTask(){
-
+		this.completed = true;
 	}
 
 
@@ -46,6 +46,11 @@ public class KitchenTask {
 	}
 
 	public static void assignTask(KitchenSheet sheet, KitchenTask task) {
+		//TODO: qui update
+	}
+
+
+	public static void setCompletedTask(KitchenSheet sheet, KitchenTask task) {
 		//TODO: qui update
 	}
 

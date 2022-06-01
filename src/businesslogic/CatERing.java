@@ -61,7 +61,7 @@ public class CatERing {
         return ktMgr;
     }
 
-    public TurnManager getTurnMgr() {
+    public TurnManager getTurnManager() {
         return turnMgr;
     }
 }

@@ -13,10 +13,9 @@ public interface KitchenTaskEventReceiver {
 
     void updateTasksRearranged(KitchenSheet sheet);
 
-    // sono necessari tutti quei parametri che sono nel DCD?
      void updateTaskAssigned(KitchenSheet sheet, KitchenTask task);
 
     void updateTaskCompleted(KitchenSheet sheet, KitchenTask task);
 
-    void updateTurnCompleteness (Turn turn, boolean isComplete);
+    void updateTurnCompleteness (KitchenSheet sheet, Turn turn, boolean isComplete);
 }

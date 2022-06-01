@@ -66,7 +66,7 @@ public class KitchenSheet {
 	}
 
 	public void specifyCompletedTask(KitchenTask task){
-
+		task.setCompletedTask();
 	}
 
 

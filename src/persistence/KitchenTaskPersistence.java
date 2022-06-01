@@ -38,12 +38,12 @@ public class KitchenTaskPersistence implements KitchenTaskEventReceiver {
 
 	@Override
 	public void updateTaskCompleted(KitchenSheet sheet, KitchenTask task) {
-
+		KitchenTask.setCompletedTask(sheet, task);
 	}
 
 	@Override
-	public void updateTurnCompleteness(Turn turn, boolean isComplete) {
-
+	public void updateTurnCompleteness(KitchenSheet sheet, Turn turn, boolean isComplete) {
+		Turn.setTurnCompleteness(sheet, isComplete);
 	}
 
 }
