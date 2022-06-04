@@ -39,6 +39,7 @@ public class TestCatERingKitchenTask {
             System.out.println("\nTEST DELETE KITCHEN TASK");
             catERing.getKitchenTaskManager().deleteKitchenTask(prepareSpaghetti);
             System.out.println("Foglio con task \"spaghetti\" rimosso: "+sheet);
+            
 
         } catch (UseCaseLogicException e) {
         System.out.println("Errore di logica nello use case");
