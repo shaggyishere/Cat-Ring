@@ -1,16 +1,3 @@
 out/
 *.class
-/out/production/CatERing/businesslogic/CatERing.class
 /CatERing.iml
-/out/production/CatERing/CatERingApp.class
-/out/production/CatERing/businesslogic/event/EventInfo$1.class
-/out/production/CatERing/businesslogic/event/EventInfo.class
-/out/production/CatERing/businesslogic/event/EventItemInfo.class
-/out/production/CatERing/businesslogic/event/EventManager.class
-/out/production/CatERing/ui/general/EventsInfoDialog.class
-/out/production/CatERing/ui/menu/ChooseSectionDialog.class
-/out/production/CatERing/ui/menu/InsertItemDialog.class
-/.idea/libraries/mysql_connector_java_8_0_29.xml
-/.idea/misc.xml
-/out/production/CatERing/persistence/PersistenceManager.class
-*.xml
