@@ -24,6 +24,7 @@ public class User {
         id = 0;
         username = "";
         this.roles = new HashSet<>();
+        this.assignedEvents = new ArrayList<>();
     }
 
     public boolean isChef() {
@@ -100,12 +101,21 @@ public class User {
 
     public static User loadUser(String username) {
         User u = new User();
-        String userQuery = "SELECT * FROM Users WHERE username='"+username+"'";
+        String userQuery = "SELECT * FROM Users u JOIN events on chef_id = u.id WHERE username='"+username+"'";
         PersistenceManager.executeQuery(userQuery, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {
                 u.id = rs.getInt("id");
                 u.username = rs.getString("username");
+                String n = rs.getString("name");
+                EventInfo e = new EventInfo(n);
+                e.setId(rs.getInt("id"));
+                e.setDateStart(rs.getDate("date_start"));
+                e.setDateEnd(rs.getDate("date_end"));
+                e.setParticipants(rs.getInt("expected_participants"));
+                int org = rs.getInt("organizer_id");
+                e.setOrganizer(User.loadUserById(org));
+                u.assignedEvents.add(e);
             }
         });
         if (u.id > 0) {

@@ -6,6 +6,7 @@ public class TurnTable {
     private List<Turn> turns;
 
 	// DUBBIO: if (turns.contains(turn)) dovremmo aggiungerlo anche al DSD? Forse no, bu
+	//secondo me non per forza, visto che loro nei video dicono che non è per forza da integrare il DSD dopo aver fatto l'implementazione
 	public void specifyTurnCompleteness(Turn turn, boolean isComplete) {
 		if (turns.contains(turn))
 			turn.setCompleteness(isComplete);

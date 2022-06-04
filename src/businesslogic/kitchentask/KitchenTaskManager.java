@@ -27,13 +27,12 @@ public class KitchenTaskManager {
 		User user = CatERing.getInstance().getUserManager().getCurrentUser();
 
 		// come mai non ti convince questa sotto?
-        /*if (!user.isChef() ||
+        if (!user.isChef() ||
                 !event.getServices().contains(service) ||
-                !user.getAssignedEvents().contains(event) ||
-                service.getUsedMenu() == null) {
+				service.getUsedMenu() == null ||
+				!user.getAssignedEvents().contains(event)) {
             throw new UseCaseLogicException();
         }
-        */
 		KitchenSheet sheet = new KitchenSheet(title, service);
 		this.setCurrentSheet(sheet);
 		this.notifySheetCreated(sheet);
@@ -43,13 +42,12 @@ public class KitchenTaskManager {
 
 	public KitchenSheet chooseKitchenSheet(KitchenSheet sheet, EventInfo event, ServiceInfo service) throws UseCaseLogicException{
 		User user = CatERing.getInstance().getUserManager().getCurrentUser();
-        /*if (!user.isChef() ||
+        if (!user.isChef() ||
                 !event.getServices().contains(service) ||
                 !user.getAssignedEvents().contains(event) ||
                 service.getUsedMenu() == null) {
             throw new UseCaseLogicException();
         }
-        */
 		this.setCurrentSheet(sheet);
 
 		return sheet;
@@ -86,13 +84,6 @@ public class KitchenTaskManager {
 		this.currentSheet.moveTask(task, position);
 		this.notifyTasksRearranged(task, position);
 	}
-
-	// DUBBIO: io non lo metterei qui, ma nel TurnManager (Anche perché loro il getProcedureBook NON l'hanno messo nel MenuMagager, ma nel ProcedureManager)
-//	public List<Turn> getTurnTable(){
-//		TurnManager turnMgr = CatERing.getInstance().getTurnManager();
-//		TurnTable tt = turnMgr.getTurnTable();
-//		return null;
-//	}
 
 	public void assignTask(KitchenTask task, Turn turn, Cook cook, String timing, String quantity) throws UseCaseLogicException {
 		if (this.currentSheet == null || ! this.currentSheet.getKitchenTasks().contains(task))

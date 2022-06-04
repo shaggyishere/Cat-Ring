@@ -9,6 +9,8 @@ import persistence.ResultHandler;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Objects;
 
 public class EventInfo implements EventItemInfo {
     private int id;
@@ -30,6 +32,11 @@ public class EventInfo implements EventItemInfo {
 
     public ObservableList<ServiceInfo> getServices() {
         return FXCollections.unmodifiableObservableList(this.services);
+    }
+
+    //TODO: maybe to delete
+    public List<ServiceInfo> getServiceInfos() {
+        return services.stream().toList();
     }
 
     public String toString() {
@@ -57,7 +64,7 @@ public class EventInfo implements EventItemInfo {
         });
 
         for (EventInfo e : all) {
-            e.services = ServiceInfo.loadServiceInfoForEvent(e.id);
+            e.services.addAll(ServiceInfo.loadServiceInfoForEvent(e.id));
         }
         return all;
     }
@@ -94,5 +101,38 @@ public class EventInfo implements EventItemInfo {
 
     public User getOrganizer() {
         return organizer;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public void setParticipants(int participants) {
+        this.participants = participants;
+    }
+
+    public void setOrganizer(User organizer) {
+        this.organizer = organizer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EventInfo)) return false;
+        EventInfo eventInfo = (EventInfo) o;
+        return id == eventInfo.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.Objects;
 
 public class ServiceInfo implements EventItemInfo {
     private int id;
@@ -68,5 +69,17 @@ public class ServiceInfo implements EventItemInfo {
         });
 
         return result;
+    }
+
+    public static ServiceInfo getFirstServiceForEvent(EventInfo event) {
+        return loadServiceInfoForEvent(event.getId()).stream().findFirst().get();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ServiceInfo)) return false;
+        ServiceInfo that = (ServiceInfo) o;
+        return id == that.id;
     }
 }
