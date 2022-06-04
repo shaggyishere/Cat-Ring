@@ -10,6 +10,7 @@ public abstract class Procedure {
 	private List <ProcedureIngredient> ingredients;
 
 	// TODO: volendo costruttore da riempire un po' almeno per i test (es. titolo, qlc)
+	//idk non è il caso d'uso che dobbiamo implementare :/
 	public Procedure() {
 		this.ingredients = new ArrayList<>();
 		this.assignedInTasks = new ArrayList<>();

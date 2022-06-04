@@ -26,7 +26,6 @@ public class KitchenTaskManager {
 	public KitchenSheet createKitchenSheet(String title, EventInfo event, ServiceInfo service) throws UseCaseLogicException {
 		User user = CatERing.getInstance().getUserManager().getCurrentUser();
 
-		// come mai non ti convince questa sotto?
         if (!user.isChef() ||
                 !event.getServices().contains(service) ||
 				service.getUsedMenu() == null ||

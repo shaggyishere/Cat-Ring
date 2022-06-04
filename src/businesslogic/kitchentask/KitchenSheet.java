@@ -35,7 +35,7 @@ public class KitchenSheet {
 	public KitchenTask addKitchenTask(Procedure procedure){
 		KitchenTask task = new KitchenTask(procedure);
 		this.kitchenTasks.add(task);
-		procedure.addAssignedTask(task);
+		procedure.addAssignedTask(task); //fixme: forse andrebbe tolto/modificato sempre per il discorso di responsabilità
 		return task;
 	}
 
@@ -93,7 +93,7 @@ public class KitchenSheet {
 		return "KitchenSheet{" +
 				"title='" + title + '\'' +
 				", kitchenTasks=" + kitchenTasks +
-				", kitchenSheetService=" + kitchenSheetService +
+				", \nkitchenSheetService=" + kitchenSheetService +
 				'}';
 	}
 }

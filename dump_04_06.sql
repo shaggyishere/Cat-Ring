@@ -181,7 +181,7 @@ INSERT INTO `recipes` (`id`, `name`) VALUES
 	(16, 'Pizzette'),
 	(17, 'Tramezzini'),
 	(18, 'Sorbetto al limone'),
-	(19, 'Torta Saint Honoré'),
+	(19, 'Torta Saint Honore'),
 	(20, 'Risotto alla zucca');
 
 -- Dump della struttura di tabella catering.roles

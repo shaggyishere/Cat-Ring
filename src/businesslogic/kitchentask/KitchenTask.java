@@ -61,13 +61,13 @@ public class KitchenTask {
 
 	@Override
 	public String toString() {
-		return "KitchenTask{" +
-				"timing='" + timing + '\'' +
-				", quantity='" + quantity + '\'' +
+		return "\nKitchenTask{" +
+				"timing='" + (timing != null ? timing : "") + '\'' +
+				", quantity='" + (quantity != null ? quantity : "") + '\'' +
 				", completed=" + completed +
 				", procedure=" + procedure +
-				", turn=" + turn +
-				", cook=" + cook +
+				", turn=" + (turn != null ? turn : "''") +
+				", cook=" + (cook != null ? cook : "''") +
 				'}';
 	}
 }
