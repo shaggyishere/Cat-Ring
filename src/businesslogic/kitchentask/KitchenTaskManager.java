@@ -80,6 +80,7 @@ public class KitchenTaskManager {
 			throw new UseCaseLogicException();
 		if (position < 0 || position >= currentSheet.getKitchenTasks().size())
 			throw new IllegalArgumentException();
+		position--; //because list start counting from 0
 		this.currentSheet.moveTask(task, position);
 		this.notifyTasksRearranged(task, position);
 	}

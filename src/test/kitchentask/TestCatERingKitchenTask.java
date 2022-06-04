@@ -34,12 +34,23 @@ public class TestCatERingKitchenTask {
             // fixme why? perché ci vuoi male? :') secondo me va bene anche solo così il test :O
             System.out.println("\nTEST ADD KITCHEN TASK");
             KitchenTask prepareSpaghetti = catERing.getKitchenTaskManager().addKitchenTask(new Recipe("spaghetti"));
-            System.out.println("Foglio con nuovo task: "+sheet);
+            System.out.println("Foglio con nuovo task \"spaghetti\": "+sheet);
 
             System.out.println("\nTEST DELETE KITCHEN TASK");
             catERing.getKitchenTaskManager().deleteKitchenTask(prepareSpaghetti);
             System.out.println("Foglio con task \"spaghetti\" rimosso: "+sheet);
-            
+
+            System.out.println("\nTEST MOVE KITCHEN TASK");
+            int oldPosition = 0;
+            KitchenTask firstTask = sheet.getKitchenTasks().get(oldPosition);
+            int newPosition = 5;
+            System.out.println("Spostiamo il "+ (oldPosition+1) +" task \""+ firstTask.getProcedure()+ "\" in posizione " + newPosition);
+            catERing.getKitchenTaskManager().moveTask(firstTask,newPosition);
+            System.out.println("Foglio con task spostato: "+sheet);
+
+            //TODO: getTurnTable() ma necessita della creazione delle tabelle sul db
+            //TODO: assign() con tutti i suoi vari casi
+            //TODO: specificaCompitoCompletato()
 
         } catch (UseCaseLogicException e) {
         System.out.println("Errore di logica nello use case");

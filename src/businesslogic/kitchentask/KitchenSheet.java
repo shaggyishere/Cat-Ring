@@ -90,10 +90,9 @@ public class KitchenSheet {
 
 	@Override
 	public String toString() {
-		return "KitchenSheet{" +
-				"title='" + title + '\'' +
-				", kitchenTasks=" + kitchenTasks +
-				", \nkitchenSheetService=" + kitchenSheetService +
-				'}';
+		return "\n------------------------------------------------------------------------------------------------------\n"
+				+ "\""+title +"\"" +  " {"+kitchenTasks +
+				", \n" + kitchenSheetService +
+				"}\n------------------------------------------------------------------------------------------------------\n";
 	}
 }
