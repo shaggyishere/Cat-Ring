@@ -1,9 +1,9 @@
 package businesslogic.kitchentask;
 
-import businesslogic.menu.MenuItem;
+import businesslogic.BusinessLogicException;
 import businesslogic.procedure.Procedure;
 import businesslogic.turn.Turn;
-import businesslogic.user.Cook;
+import businesslogic.user.User;
 
 public class KitchenTask {
 	private String timing;
@@ -11,15 +11,19 @@ public class KitchenTask {
 	private boolean completed;
 	private Procedure procedure;
 	private Turn turn;
-	private Cook cook;
+	private User cook;
 
 	public KitchenTask(Procedure proc) {
 		this.procedure = proc;
 		this.completed = false;
 	}
 
-	public void assign(KitchenTask task, Turn turn, Cook cook, String timing, String quantity){
-		if (turn == null || !turn.isCompleted() || cook != null && cook.availableFor(turn)){
+	public void assign(Turn turn, User cook, String timing, String quantity) throws BusinessLogicException {
+		//do the assignment only if turn is not completed and cook is available for that turn
+		if ( ((turn != null && turn.isCompleted()) || (cook != null && !cook.availableFor(turn))) ){
+			throw new BusinessLogicException("Parametri assegnamento task non validi");
+		}
+		else {
 			if (turn != null)
 				this.turn = turn;
 			if (cook != null)

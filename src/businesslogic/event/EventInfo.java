@@ -34,10 +34,6 @@ public class EventInfo implements EventItemInfo {
         return FXCollections.unmodifiableObservableList(this.services);
     }
 
-    //TODO: maybe to delete
-    public List<ServiceInfo> getServiceInfos() {
-        return services.stream().toList();
-    }
 
     public String toString() {
         return name + ": " + dateStart + "-" + dateEnd + ", " + participants + " pp. (" + organizer.getUserName() + ")";

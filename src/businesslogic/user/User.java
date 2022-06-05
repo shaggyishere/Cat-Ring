@@ -1,6 +1,7 @@
 package businesslogic.user;
 
 import businesslogic.event.EventInfo;
+import businesslogic.turn.Turn;
 import javafx.collections.FXCollections;
 import persistence.PersistenceManager;
 import persistence.ResultHandler;
@@ -19,12 +20,14 @@ public class User {
     private String username;
     private Set<Role> roles;
     private List<EventInfo> assignedEvents;
+    private List<Turn> availableTurns;
 
     public User() {
         id = 0;
         username = "";
         this.roles = new HashSet<>();
         this.assignedEvents = new ArrayList<>();
+        this.availableTurns = new ArrayList<>();
     }
 
     public boolean isChef() {
@@ -45,6 +48,14 @@ public class User {
 
     public List<EventInfo> getAssignedEvents() {
         return assignedEvents;
+    }
+
+    public boolean availableFor(Turn turn){
+        return availableTurns.contains(turn);
+    }
+
+    public void addAvailabilityFor(Turn turn) {
+        availableTurns.add(turn);
     }
 
     public String toString() {

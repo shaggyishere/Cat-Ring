@@ -13,7 +13,7 @@ import businesslogic.user.User;
 
 import static businesslogic.event.ServiceInfo.getFirstServiceForEvent;
 
-public class TestCatERingKitchenTask {
+public class TestCatERingKitchenTask1a {
     public static void main(String[] args) {
         System.out.println("TEST FAKE LOGIN");
         CatERing catERing = CatERing.getInstance();
@@ -29,7 +29,8 @@ public class TestCatERingKitchenTask {
 //        System.out.println(service);
 
         try {
-            System.out.println("\nTEST CREATE SHEET");
+            System.out.println("\nTEST OPEN EXISTING SHEET");
+            //TODO fetchare un foglio da db e lavorare su quello
             KitchenSheet sheet = catERing.getKitchenTaskManager().createKitchenSheet("Primo foglio di prova", event, service);
             System.out.println("Foglio autogenerato per evento \""+ event.getName() +"\": " + sheet);
 

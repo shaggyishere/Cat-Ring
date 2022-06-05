@@ -1,5 +1,6 @@
 package businesslogic.kitchentask;
 
+import businesslogic.BusinessLogicException;
 import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
 import businesslogic.event.EventInfo;
@@ -7,8 +8,6 @@ import businesslogic.event.ServiceInfo;
 import businesslogic.procedure.Procedure;
 import businesslogic.turn.Turn;
 import businesslogic.turn.TurnManager;
-import businesslogic.turn.TurnTable;
-import businesslogic.user.Cook;
 import businesslogic.user.User;
 
 import java.util.ArrayList;
@@ -85,70 +84,70 @@ public class KitchenTaskManager {
 		this.notifyTasksRearranged(task, position);
 	}
 
-	public void assignTask(KitchenTask task, Turn turn, Cook cook, String timing, String quantity) throws UseCaseLogicException {
+	public void assignTask(KitchenTask task, Turn turn, User cook, String timing, String quantity) throws UseCaseLogicException, BusinessLogicException {
 		if (this.currentSheet == null || ! this.currentSheet.getKitchenTasks().contains(task))
 			throw new UseCaseLogicException();
 		this.currentSheet.assignTask(task, turn, cook, timing, quantity);
 		this.notifyTaskAssigned(task);
 	}
 
-	public void assignTask(KitchenTask task) throws UseCaseLogicException {
+	public void assignTask(KitchenTask task) throws UseCaseLogicException, BusinessLogicException {
 		this.assignTask(task, null, null, null, null);
 	}
 
-	public void assignTask(KitchenTask task, Turn turn) throws UseCaseLogicException{
+	public void assignTask(KitchenTask task, Turn turn) throws UseCaseLogicException, BusinessLogicException{
 		this.assignTask(task, turn, null, null, null);
 	}
 
-	public void assignTask(KitchenTask task, Cook cook) throws UseCaseLogicException{
+	public void assignTask(KitchenTask task, User cook) throws UseCaseLogicException, BusinessLogicException{
 		this.assignTask(task, null, cook, null, null);
 	}
 
-	public void assignTaskTiming(KitchenTask task, String timing) throws UseCaseLogicException{
+	public void assignTaskTiming(KitchenTask task, String timing) throws UseCaseLogicException, BusinessLogicException{
 		this.assignTask(task, null, null, timing, null);
 	}
 
-	public void assignTaskQuantity(KitchenTask task, String quantity) throws UseCaseLogicException{
+	public void assignTaskQuantity(KitchenTask task, String quantity) throws UseCaseLogicException, BusinessLogicException{
 		this.assignTask(task, null, null, null, quantity);
 	}
 
-	public void assignTask(KitchenTask task, Turn turn, Cook cook) throws UseCaseLogicException{
+	public void assignTask(KitchenTask task, Turn turn, User cook) throws UseCaseLogicException, BusinessLogicException{
 		this.assignTask(task, turn, cook, null, null);
 	}
 
-	public void assignTaskTiming(KitchenTask task, Turn turn, String timing) throws UseCaseLogicException{
+	public void assignTaskTiming(KitchenTask task, Turn turn, String timing) throws UseCaseLogicException, BusinessLogicException{
 		this.assignTask(task, turn, null, timing, null);
 	}
 
-	public void assignTaskQuantity(KitchenTask task, Turn turn, String quantity) throws UseCaseLogicException{
+	public void assignTaskQuantity(KitchenTask task, Turn turn, String quantity) throws UseCaseLogicException, BusinessLogicException{
 		this.assignTask(task, turn, null, null, quantity);
 	}
 
-	public void assignTaskTiming(KitchenTask task, Cook cook, String timing) throws UseCaseLogicException{
+	public void assignTaskTiming(KitchenTask task, User cook, String timing) throws UseCaseLogicException, BusinessLogicException{
 		this.assignTask(task, null, cook, timing, null);
 	}
 
-	public void assignTaskQuantity(KitchenTask task, Cook cook, String quantity) throws UseCaseLogicException{
+	public void assignTaskQuantity(KitchenTask task, User cook, String quantity) throws UseCaseLogicException, BusinessLogicException{
 		this.assignTask(task, null, cook, null, quantity);
 	}
 
-	public void assignTask(KitchenTask task, String timing, String quantity) throws UseCaseLogicException{
+	public void assignTask(KitchenTask task, String timing, String quantity) throws UseCaseLogicException, BusinessLogicException{
 		this.assignTask(task, null, null, timing, quantity);
 	}
 
-	public void assignTaskTiming(KitchenTask task, Turn turn, Cook cook, String timing) throws UseCaseLogicException{
+	public void assignTaskTiming(KitchenTask task, Turn turn, User cook, String timing) throws UseCaseLogicException, BusinessLogicException{
 		this.assignTask(task, turn, cook, timing, null);
 	}
 
-	public void assignTaskQuantity(KitchenTask task, Turn turn, Cook cook, String quantity) throws UseCaseLogicException{
+	public void assignTaskQuantity(KitchenTask task, Turn turn, User cook, String quantity) throws UseCaseLogicException, BusinessLogicException{
 		this.assignTask(task, turn, cook, null, quantity);
 	}
 
-	public void assignTask(KitchenTask task, Turn turn, String timing, String quantity) throws UseCaseLogicException{
+	public void assignTask(KitchenTask task, Turn turn, String timing, String quantity) throws UseCaseLogicException, BusinessLogicException{
 		this.assignTask(task, turn, null, timing, quantity);
 	}
 
-	public void assignTask(KitchenTask task, Cook cook, String timing, String quantity) throws UseCaseLogicException{
+	public void assignTask(KitchenTask task, User cook, String timing, String quantity) throws UseCaseLogicException, BusinessLogicException{
 		this.assignTask(task, null, cook, timing, quantity);
 	}
 

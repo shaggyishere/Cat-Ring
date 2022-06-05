@@ -1,12 +1,12 @@
 package businesslogic.kitchentask;
 
+import businesslogic.BusinessLogicException;
 import businesslogic.event.ServiceInfo;
 import businesslogic.menu.Menu;
-import businesslogic.menu.MenuItem;
 import businesslogic.procedure.Procedure;
 import businesslogic.procedure.Recipe;
 import businesslogic.turn.Turn;
-import businesslogic.user.Cook;
+import businesslogic.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +61,8 @@ public class KitchenSheet {
 		kitchenTasks.add(position, task);
 	}
 
-	public void assignTask(KitchenTask task, Turn turn, Cook cook, String timing, String quantity){
-		task.assign(task, turn, cook, timing, quantity);
+	public void assignTask(KitchenTask task, Turn turn, User cook, String timing, String quantity) throws BusinessLogicException {
+		task.assign(turn, cook, timing, quantity);
 	}
 
 	public void specifyCompletedTask(KitchenTask task){
