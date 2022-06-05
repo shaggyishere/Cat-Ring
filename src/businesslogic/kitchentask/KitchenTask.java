@@ -66,8 +66,8 @@ public class KitchenTask {
 				", quantity='" + (quantity != null ? quantity : "") + '\'' +
 				", completed=" + completed +
 				", procedure=" + procedure +
-				", turn=" + (turn != null ? turn : "''") +
-				", cook=" + (cook != null ? cook : "''") +
+				", turn=" + (turn != null ? turn.getWhen() : "''") +
+				", cook=" + (cook != null ? cook.getUserName() : "''") +
 				'}';
 	}
 }

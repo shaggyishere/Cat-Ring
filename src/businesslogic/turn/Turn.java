@@ -4,6 +4,11 @@ import businesslogic.kitchentask.KitchenSheet;
 
 public class Turn {
     private boolean completed;
+    private String when;
+
+    public Turn(String when) {
+        this.when = when;
+    }
 
     public Turn(boolean completed) {
         this.completed = completed;
@@ -11,6 +16,10 @@ public class Turn {
 
     public boolean isCompleted() {
         return completed;
+    }
+
+    public String getWhen() {
+        return when;
     }
 
     public void setCompleteness(boolean isComplete) {
