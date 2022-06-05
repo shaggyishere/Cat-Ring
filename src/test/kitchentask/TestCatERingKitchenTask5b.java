@@ -13,20 +13,20 @@ public class TestCatERingKitchenTask5b {
         System.out.println(catERing.getUserManager().getCurrentUser());
 
         System.out.println("\nTABELLONE DEI TURNI");
-        List<Turn> turnTable = catERing.getKitchenTaskManager().getTurnTable();
+        List<Turn> turnTable = catERing.getTurnManager().getTurnTable();
         System.out.println("######################################################");
         System.out.println(turnTable.toString().replace(", ", " "));
         System.out.println("######################################################");
 
         System.out.println("\nTEST SET TURN COMPLETENESS");
         int firstTurn = 0;
-        Turn firstTurnInTheTable = catERing.getKitchenTaskManager().getTurnTable().get(firstTurn);
+        Turn firstTurnInTheTable = catERing.getTurnManager().getTurnTable().get(firstTurn);
         boolean isComplete = true;
         System.out.println("Provo a segnare il primo turno nel tabellone come completato = "+ isComplete);
         catERing.getKitchenTaskManager().specifyTurnCompleteness(firstTurnInTheTable, isComplete);
         System.out.println("Tabellone post modifica: ");
         System.out.println("######################################################");
-        turnTable = catERing.getKitchenTaskManager().getTurnTable(); //bisogna rifare la chiamata per ottenere l'aggiornamento fatto dal db
+        turnTable = catERing.getTurnManager().getTurnTable(); //bisogna rifare la chiamata per ottenere l'aggiornamento fatto dal db
         System.out.println(turnTable.toString().replace(", ", " "));
         System.out.println("######################################################");
 

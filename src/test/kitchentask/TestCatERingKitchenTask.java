@@ -52,7 +52,7 @@ public class TestCatERingKitchenTask {
             System.out.println("Foglio con task spostato: "+sheet);
 
             System.out.println("\nTEST GET TURN TABLE");
-            List<Turn> turnTable = catERing.getKitchenTaskManager().getTurnTable();
+            List<Turn> turnTable = catERing.getTurnManager().getTurnTable();
             System.out.println("######################################################");
             System.out.println(turnTable.toString().replace(", ", " "));
             System.out.println("######################################################");
