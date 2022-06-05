@@ -11,6 +11,8 @@ import businesslogic.procedure.Recipe;
 import businesslogic.turn.Turn;
 import businesslogic.user.User;
 
+import java.util.List;
+
 import static businesslogic.event.ServiceInfo.getFirstServiceForEvent;
 
 public class TestCatERingKitchenTask {
@@ -49,7 +51,11 @@ public class TestCatERingKitchenTask {
             catERing.getKitchenTaskManager().moveTask(firstTask,newPosition);
             System.out.println("Foglio con task spostato: "+sheet);
 
-            //TODO: getTurnTable() ma necessita della creazione delle tabelle sul db
+            System.out.println("\nTEST GET TURN TABLE");
+            List<Turn> turnTable = catERing.getKitchenTaskManager().getTurnTable();
+            System.out.println("######################################################");
+            System.out.println(turnTable.toString().replace(", ", " "));
+            System.out.println("######################################################");
 
             System.out.println("\nTEST ASSIGN VALUES TO FIRST TASK");
             int marinellaID = 4;

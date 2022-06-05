@@ -17,5 +17,5 @@ public interface KitchenTaskEventReceiver {
 
     void updateTaskCompleted(KitchenSheet sheet, KitchenTask task);
 
-    void updateTurnCompleteness (KitchenSheet sheet, Turn turn, boolean isComplete);
+    void updateTurnCompleteness (Turn turn, boolean isComplete);
 }

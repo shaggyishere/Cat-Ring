@@ -50,7 +50,6 @@ public class TestCatERingKitchenTask1a {
             catERing.getKitchenTaskManager().moveTask(firstTask,newPosition);
             System.out.println("Foglio con task spostato: "+sheet);
 
-            //TODO: getTurnTable() ma necessita della creazione delle tabelle sul db
 
             System.out.println("\nTEST ASSIGN VALUES TO FIRST TASK");
             int marinellaID = 4;

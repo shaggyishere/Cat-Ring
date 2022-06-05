@@ -84,6 +84,11 @@ public class KitchenTaskManager {
 		this.notifyTasksRearranged(task, position);
 	}
 
+	public List<Turn> getTurnTable() {
+		TurnManager turnMgr = CatERing.getInstance().getTurnManager();
+		return turnMgr.getTurnTable();
+	}
+
 	public void assignTask(KitchenTask task, Turn turn, User cook, String timing, String quantity) throws UseCaseLogicException, BusinessLogicException {
 		if (this.currentSheet == null || ! this.currentSheet.getKitchenTasks().contains(task))
 			throw new UseCaseLogicException();
@@ -208,7 +213,7 @@ public class KitchenTaskManager {
 
 	private void notifyTurnCompletenessChanged(Turn turn, boolean isComplete){
 		for (KitchenTaskEventReceiver eventReceiver : eventReceivers) {
-			eventReceiver.updateTurnCompleteness(this.currentSheet, turn, isComplete);
+			eventReceiver.updateTurnCompleteness(turn, isComplete);
 		}
 	}
 
@@ -217,7 +222,6 @@ public class KitchenTaskManager {
 		return currentSheet;
 	}
 
-	// non so se servirà, nel caso alla fine possiamo poi toglierlo
 	public List<KitchenTaskEventReceiver> getEventReceivers() {
 		return eventReceivers;
 	}

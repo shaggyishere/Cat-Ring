@@ -1,6 +1,7 @@
 package businesslogic.turn;
 
 import businesslogic.kitchentask.KitchenSheet;
+import persistence.PersistenceManager;
 
 import java.util.Objects;
 
@@ -29,8 +30,10 @@ public class Turn {
     }
 
     // STATIC METHODS FOR PERSISTENCE
-    public static void setTurnCompleteness(KitchenSheet sheet, boolean isComplete) {
-        // TODO: qui update
+    public static void setTurnCompleteness(Turn turn, boolean isComplete) {
+        String upd = "UPDATE Turns t SET completed = " + (isComplete ? 1 : 0) +
+                " WHERE t.when = '" + turn.getWhen()+ '\'';
+        PersistenceManager.executeUpdate(upd);
     }
 
     @Override
@@ -44,5 +47,13 @@ public class Turn {
     @Override
     public int hashCode() {
         return Objects.hash(when);
+    }
+
+    @Override
+    public String toString() {
+        return "Turn{" +
+                "when=" + when +
+                ", completed='" + completed + '\'' +
+                "}\n";
     }
 }

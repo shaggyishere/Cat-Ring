@@ -1,14 +1,15 @@
 package businesslogic.turn;
 
+import java.util.List;
+
 public class TurnManager {
-    private TurnTable turnTable;
 
 	public void specifyTurnCompleteness(Turn turn, boolean isComplete) {
-		this.turnTable.specifyTurnCompleteness(turn, isComplete);
+		turn.setCompleteness(isComplete);
 	}
 
-	public TurnTable getTurnTable() {
-		return turnTable;
+	public List<Turn> getTurnTable() {
+		return TurnTable.getTurns();
 	}
 
 }

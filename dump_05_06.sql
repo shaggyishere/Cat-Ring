@@ -227,6 +227,24 @@ INSERT INTO `services` (`id`, `event_id`, `name`, `proposed_menu_id`, `approved_
 	(7, 3, 'Pranzo giorno 2', 0, 0, '2020-10-03', '12:00:00', '15:00:00', 300),
 	(8, 3, 'Pranzo giorno 3', 0, 0, '2020-10-04', '12:00:00', '15:00:00', 400);
 
+-- Dump della struttura di tabella catering.turns
+DROP TABLE IF EXISTS `turns`;
+CREATE TABLE IF NOT EXISTS `turns` (
+  `when` varchar(20) NOT NULL,
+  `completed` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`when`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Dump dei dati della tabella catering.turns: ~6 rows (circa)
+DELETE FROM `turns`;
+INSERT INTO `turns` (`when`, `completed`) VALUES
+	('Giovedi ore 15:00', 1),
+	('Giovedi ore 16:00', 0),
+	('Giovedi ore 17:00', 1),
+	('Martedi ore 15:00', 0),
+	('Martedi ore 16:00', 0),
+	('Martedi ore 17:00', 0);
+
 -- Dump della struttura di tabella catering.userroles
 DROP TABLE IF EXISTS `userroles`;
 CREATE TABLE IF NOT EXISTS `userroles` (
