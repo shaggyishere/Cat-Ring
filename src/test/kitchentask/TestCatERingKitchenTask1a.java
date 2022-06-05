@@ -1,34 +1,80 @@
 package test.kitchentask;
 
+import businesslogic.BusinessLogicException;
 import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
 import businesslogic.event.EventInfo;
 import businesslogic.event.ServiceInfo;
 import businesslogic.kitchentask.KitchenSheet;
-import javafx.collections.ObservableList;
+import businesslogic.kitchentask.KitchenTask;
+import businesslogic.procedure.Recipe;
+import businesslogic.turn.Turn;
+import businesslogic.user.User;
+
+import static businesslogic.event.ServiceInfo.getFirstServiceForEvent;
 
 public class TestCatERingKitchenTask1a {
     public static void main(String[] args) {
-        //Menu m = CatERing.getInstance().getMenuManager().createMenu("Menu Pinco Pallino");
         System.out.println("TEST FAKE LOGIN");
-        CatERing.getInstance().getUserManager().fakeLogin("Lidia");
-        System.out.println(CatERing.getInstance().getUserManager().getCurrentUser());
+        CatERing catERing = CatERing.getInstance();
+        catERing.getUserManager().fakeLogin("Lidia");
+        System.out.println(catERing.getUserManager().getCurrentUser());
 
-        System.out.println("\nTEST GET EVENT BY NAME");
+//        System.out.println("\nTEST GET EVENT BY NAME");
         EventInfo event = EventInfo.getEventByName("Compleanno di Manuela");
-        System.out.println(event);
+//        System.out.println(event);
 
-        System.out.println("\nTEST GET SERVICE BY EVENT ID");
-        ObservableList<ServiceInfo> serviceInfos = ServiceInfo.loadServiceInfoForEvent(event.getId());
-        System.out.println(serviceInfos);
+//        System.out.println("\nTEST GET SERVICE BY EVENT ID");
+        ServiceInfo service = getFirstServiceForEvent(event);
+//        System.out.println(service);
 
-        // TODO
-//        try {
-//            System.out.println("\nTEST CHOOSE SHEET");
-//            KitchenSheet sheet = CatERing.getInstance().getKtMgr().chooseKitchenSheet("Primo foglio di prova", event, serviceInfos.stream().findFirst().get());
-//            System.out.println(sheet);
-//        } catch (UseCaseLogicException e) {
-//            System.out.println("Errore di caso d'uso");
-//        }
+        try {
+            System.out.println("\nTEST OPEN EXISTING SHEET");
+            //TODO fetchare un foglio da db e lavorare su quello
+            KitchenSheet sheet = catERing.getKitchenTaskManager().createKitchenSheet("Primo foglio di prova", event, service);
+            System.out.println("Foglio autogenerato per evento \""+ event.getName() +"\": " + sheet);
+
+            System.out.println("\nTEST ADD KITCHEN TASK");
+            KitchenTask prepareSpaghetti = catERing.getKitchenTaskManager().addKitchenTask(new Recipe("spaghetti"));
+            System.out.println("Foglio con nuovo task \"spaghetti\": "+sheet);
+
+            System.out.println("\nTEST DELETE KITCHEN TASK");
+            catERing.getKitchenTaskManager().deleteKitchenTask(prepareSpaghetti);
+            System.out.println("Foglio con task \"spaghetti\" rimosso: "+sheet);
+
+            System.out.println("\nTEST MOVE KITCHEN TASK");
+            int firstPosition = 0;
+            KitchenTask firstTask = sheet.getKitchenTasks().get(firstPosition);
+            int newPosition = 5;
+            System.out.println("Spostiamo il "+ (firstPosition+1) +" task \""+ firstTask.getProcedure()+ "\" in posizione " + newPosition);
+            catERing.getKitchenTaskManager().moveTask(firstTask,newPosition);
+            System.out.println("Foglio con task spostato: "+sheet);
+
+            //TODO: getTurnTable() ma necessita della creazione delle tabelle sul db
+
+            System.out.println("\nTEST ASSIGN VALUES TO FIRST TASK");
+            int marinellaID = 4;
+            User cookMarinella = User.loadUserById(marinellaID);
+            Turn tuesdayAftnoonTurn = new Turn("Giovedi ore 16:00");
+            cookMarinella.addAvailabilityFor(tuesdayAftnoonTurn);
+            String timing = "50 minuti";
+            String quantity = "6 porzioni";
+            firstTask = sheet.getKitchenTasks().get(firstPosition);
+            System.out.println(String.format("Assegniamo al primo task il cuoco: %s, nel turno: %s, con durata: %s e quantita': %s", cookMarinella.getUserName(), tuesdayAftnoonTurn.getWhen(), timing, quantity));
+            catERing.getKitchenTaskManager().assignTask(firstTask, tuesdayAftnoonTurn, cookMarinella, timing, quantity);
+            System.out.println("Foglio con primo task assegnato: "+sheet);
+
+            
+            System.out.println("\nTEST SET FIRST TASK COMPLETED");
+            catERing.getKitchenTaskManager().specifyCompletedTask(firstTask);
+            System.out.println("Foglio con primo task completato: "+sheet);
+
+        } catch (UseCaseLogicException e) {
+            System.out.println("Errore di logica nello use case");
+        } catch (BusinessLogicException e) {
+            System.out.println(e.getMessage());
+        }
+
+
     }
 }

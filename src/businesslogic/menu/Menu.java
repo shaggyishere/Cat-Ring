@@ -495,7 +495,43 @@ public class Menu {
     }
 
     public static Menu getMenuById(int id) {
-        return loadAllMenus().stream().filter(menu -> menu.id == id).findFirst().get();
+        String query = "SELECT * FROM Menus WHERE id = " + id;
+        Menu m = new Menu();
+        PersistenceManager.executeQuery(query, new ResultHandler() {
+            @Override
+            public void handle(ResultSet rs) throws SQLException {
+                m.id = id;
+                m.title = rs.getString("title");
+                m.published = rs.getBoolean("published");
+                m.owner = User.loadUserById(rs.getInt("owner_id"));
+            }
+        });
+
+        // load features
+        String featQ = "SELECT * FROM MenuFeatures WHERE menu_id = " + m.id;
+        PersistenceManager.executeQuery(featQ, new ResultHandler() {
+            @Override
+            public void handle(ResultSet rs) throws SQLException {
+                m.featuresMap.put(rs.getString("name"), rs.getBoolean("value"));
+            }
+        });
+
+        // load sections
+        m.sections = Section.loadSectionsFor(m.id);
+
+        // load free items
+        m.freeItems = MenuItem.loadItemsFor(m.id, 0);
+
+        // find if "in use"
+        String inuseQ = "SELECT * FROM Services WHERE approved_menu_id = " + m.id;
+        PersistenceManager.executeQuery(inuseQ, new ResultHandler() {
+            @Override
+            public void handle(ResultSet rs) throws SQLException {
+                // se c'è anche un solo risultato vuol dire che il menù è in uso
+                m.inUse = true;
+            }
+        });
+        return m;
     }
 
     public static void saveSectionOrder(Menu m) {
@@ -532,6 +568,7 @@ public class Menu {
     }
 
     public List<Recipe> getRecipes() {
+
         List<Recipe> recipes = new ArrayList<>();
 
         for (MenuItem item : freeItems) {
