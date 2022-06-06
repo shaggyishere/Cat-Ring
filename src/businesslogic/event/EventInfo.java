@@ -27,6 +27,7 @@ public class EventInfo implements EventItemInfo {
 
     public EventInfo(String name) {
         this.name = name;
+        this.services = FXCollections.observableArrayList();
         id = 0;
     }
 
