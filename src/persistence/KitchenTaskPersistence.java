@@ -13,7 +13,7 @@ public class KitchenTaskPersistence implements KitchenTaskEventReceiver {
 
 	@Override
 	public void updateTaskAdded(KitchenSheet sheet, KitchenTask task) {
-		KitchenTask.addTask(sheet, task);
+		KitchenTask.addTask(sheet, task, sheet.getKitchenTaskPosition(task));
 	}
 
 	@Override
@@ -27,18 +27,18 @@ public class KitchenTaskPersistence implements KitchenTaskEventReceiver {
 	}
 
 	@Override
-	public void updateTasksRearranged(KitchenSheet sheet) {
-		KitchenSheet.saveTasksOrder(sheet);
+	public void updateTasksRearranged(KitchenSheet sheet, KitchenTask task) {
+		KitchenSheet.saveTasksOrder(sheet, task);
 	}
 
 	@Override
-	public void updateTaskAssigned(KitchenSheet sheet, KitchenTask task) {
-		KitchenTask.assignTask(sheet, task);
+	public void updateTaskAssigned(KitchenTask task) {
+		KitchenTask.assignTask(task);
 	}
 
 	@Override
-	public void updateTaskCompleted(KitchenSheet sheet, KitchenTask task) {
-		KitchenTask.setCompletedTask(sheet, task);
+	public void updateTaskCompleted(KitchenTask task) {
+		KitchenTask.setCompletedTask(task);
 	}
 
 	@Override

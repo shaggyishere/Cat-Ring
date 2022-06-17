@@ -52,10 +52,12 @@ public class PersistenceManager {
                 Connection conn = DriverManager.getConnection(url, username, password);
                 PreparedStatement ps = conn.prepareStatement(parametrizedQuery, Statement.RETURN_GENERATED_KEYS);
         ) {
+            System.out.println(ps);
             for (int i = 0; i < itemNumber; i++) {
                 handler.handleBatchItem(ps, i);
                 ps.addBatch();
             }
+            System.out.println(ps);
             result = ps.executeBatch();
             ResultSet keys = ps.getGeneratedKeys();
             int count = 0;
@@ -71,7 +73,7 @@ public class PersistenceManager {
         return result;
     }
 
-    public static int executeUpdate(String update) {
+    public static int executeUpdate(String update){
         int result = 0;
         try (Connection conn = DriverManager.getConnection(url, username, password);
              PreparedStatement ps = conn.prepareStatement(update, Statement.RETURN_GENERATED_KEYS)) {

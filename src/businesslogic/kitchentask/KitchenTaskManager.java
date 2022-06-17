@@ -35,7 +35,7 @@ public class KitchenTaskManager {
 		this.setCurrentSheet(sheet);
 		this.notifySheetCreated(sheet);
 
-		return sheet;
+		return currentSheet;
 	}
 
 	public KitchenSheet chooseKitchenSheet(KitchenSheet sheet, EventInfo event, ServiceInfo service) throws UseCaseLogicException{
@@ -46,7 +46,9 @@ public class KitchenTaskManager {
                 service.getUsedMenu() == null) {
             throw new UseCaseLogicException();
         }
-		this.setCurrentSheet(sheet);
+		int idFromTitle = KitchenSheet.getIdFromTitle(sheet.getTitle());
+		KitchenSheet currentSheet = KitchenSheet.getSheetById(idFromTitle);
+		this.setCurrentSheet(currentSheet);
 
 		return sheet;
 	}
@@ -81,12 +83,7 @@ public class KitchenTaskManager {
 			throw new IllegalArgumentException();
 		position--; //because list start counting from 0
 		this.currentSheet.moveTask(task, position);
-		this.notifyTasksRearranged(task, position);
-	}
-
-	public List<Turn> getTurnTable() {
-		TurnManager turnMgr = CatERing.getInstance().getTurnManager();
-		return turnMgr.getTurnTable();
+		this.notifyTasksRearranged(task);
 	}
 
 	public void assignTask(KitchenTask task, Turn turn, User cook, String timing, String quantity) throws UseCaseLogicException, BusinessLogicException {
@@ -193,21 +190,21 @@ public class KitchenTaskManager {
 		}
 	}
 
-	private void notifyTasksRearranged(KitchenTask task, int position){
+	private void notifyTasksRearranged(KitchenTask task){
 		for (KitchenTaskEventReceiver eventReceiver : eventReceivers) {
-			eventReceiver.updateTasksRearranged(this.currentSheet);
+			eventReceiver.updateTasksRearranged(this.currentSheet, task);
 		}
 	}
 
 	private void notifyTaskAssigned(KitchenTask task){
 		for (KitchenTaskEventReceiver eventReceiver : eventReceivers) {
-			eventReceiver.updateTaskAssigned(this.currentSheet, task);
+			eventReceiver.updateTaskAssigned(task);
 		}
 	}
 
 	private void notifyTaskCompleted(KitchenTask task){
 		for (KitchenTaskEventReceiver eventReceiver : eventReceivers) {
-			eventReceiver.updateTaskCompleted(this.currentSheet, task);
+			eventReceiver.updateTaskCompleted(task);
 		}
 	}
 

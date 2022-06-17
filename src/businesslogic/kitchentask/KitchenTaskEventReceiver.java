@@ -11,11 +11,11 @@ public interface KitchenTaskEventReceiver {
 
     void updateSheetRestored(KitchenSheet sheet);
 
-    void updateTasksRearranged(KitchenSheet sheet);
+    void updateTasksRearranged(KitchenSheet sheet, KitchenTask task);
 
-     void updateTaskAssigned(KitchenSheet sheet, KitchenTask task);
+     void updateTaskAssigned(KitchenTask task);
 
-    void updateTaskCompleted(KitchenSheet sheet, KitchenTask task);
+    void updateTaskCompleted(KitchenTask task);
 
     void updateTurnCompleteness (Turn turn, boolean isComplete);
 }

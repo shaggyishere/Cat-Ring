@@ -30,9 +30,9 @@ public class TestCatERingKitchenTask1a {
 
         try {
             System.out.println("\nTEST OPEN EXISTING SHEET");
-            //TODO fetchare un foglio da db e lavorare su quello
-            KitchenSheet sheet = catERing.getKitchenTaskManager().createKitchenSheet("Primo foglio di prova", event, service);
-            System.out.println("Foglio autogenerato per evento \""+ event.getName() +"\": " + sheet);
+            KitchenSheet sheetToOpen = new KitchenSheet("Primo foglio di prova", service);
+            KitchenSheet sheet = catERing.getKitchenTaskManager().chooseKitchenSheet(sheetToOpen, event, service);
+            System.out.println("Foglio esistente per evento \""+ event.getName() +"\": " + sheet);
 
             System.out.println("\nTEST ADD KITCHEN TASK");
             KitchenTask prepareSpaghetti = catERing.getKitchenTaskManager().addKitchenTask(new Recipe("spaghetti"));

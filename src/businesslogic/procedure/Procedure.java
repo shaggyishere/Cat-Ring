@@ -6,12 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Procedure {
+	private int id;
 	private List <KitchenTask> assignedInTasks;
 	private List <ProcedureIngredient> ingredients;
 
 	public Procedure() {
+		id = 0;
 		this.ingredients = new ArrayList<>();
 		this.assignedInTasks = new ArrayList<>();
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public List<ProcedureIngredient> getIngredients() {
