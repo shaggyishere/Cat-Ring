@@ -47,7 +47,7 @@ public class TestCatERingKitchenTask {
 			catERing.getKitchenTaskManager().deleteKitchenTask(prepareCarpaccio);
 			catERing.getKitchenTaskManager().deleteKitchenTask(prepareAlici);
 			catERing.getKitchenTaskManager().deleteKitchenTask(prepareVitello);
-			System.out.println("Foglio con tasks \"Carpaccio di spada\", \"Alici marinate\" rimossi: "+sheet);
+			System.out.println("Foglio con tasks \"Vitello tonnato\", \"Carpaccio di spada\", \"Alici marinate\" rimossi: "+sheet);
 
 			System.out.println("\nTEST MOVE KITCHEN TASK");
 			int firstPosition = 0;

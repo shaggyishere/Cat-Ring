@@ -113,8 +113,8 @@ public class KitchenSheet {
 				int kitchenTaskId = rs.getInt("id");
 				allTasksId.add(kitchenTaskId);
 			});
-			System.out.println(allTasksId);
-			System.out.println(sheet.kitchenTasks);
+//			System.out.println(allTasksId);
+//			System.out.println(sheet.kitchenTasks);
 
 			for (int pos = 0; pos < allTasksId.size(); pos++)
 				sheet.kitchenTasks.get(pos).setId(allTasksId.get(pos));
@@ -145,7 +145,7 @@ public class KitchenSheet {
 
 	public static KitchenSheet getSheetById(int id){
 		//TODO fetchare dati da db e creare oggetto sheet corrispondente (settare attributi)
-		return sheet;
+		return null;
 	}
 
 	public List<KitchenTask> getKitchenTasks() {

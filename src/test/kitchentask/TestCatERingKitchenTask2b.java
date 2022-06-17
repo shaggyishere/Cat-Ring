@@ -37,7 +37,10 @@ public class TestCatERingKitchenTask2b {
 
 			System.out.println("\nTEST DELETE KITCHEN TASK");
 			catERing.getKitchenTaskManager().deleteKitchenTask(prepareCarpaccio);
-			System.out.println("Foglio con tasks \"Carpaccio di spada\" rimosso: "+sheet);
+			catERing.getKitchenTaskManager().deleteKitchenTask(prepareAlici);
+			catERing.getKitchenTaskManager().deleteKitchenTask(prepareVitello);
+			System.out.println("Foglio con tasks \"Vitello tonnato\", \"Carpaccio di spada\", \"Alici marinate\" rimossi: "+sheet);
+
 
 			System.out.println("\nTEST RESTORE KITCHEN TASK");
 			catERing.getKitchenTaskManager().restoreOriginalTasks();
