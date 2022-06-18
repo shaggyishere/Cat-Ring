@@ -27,6 +27,10 @@ public class ServiceInfo implements EventItemInfo {
         this.name = name;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public Menu getUsedMenu() {
         return usedMenu;
     }

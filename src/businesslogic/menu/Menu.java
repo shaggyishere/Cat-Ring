@@ -115,7 +115,7 @@ public class Menu {
     }
 
     public String toString() {
-        return title + " (autore: " + owner.getUserName() + ")," + (published ? " " : " non ") +
+        return title + " (autore: " + (owner != null ? owner.getUserName() : "") + ")," + (published ? " " : " non ") +
                 "pubblicato," + (inUse ? " " : " non ") + "in uso";
     }
 

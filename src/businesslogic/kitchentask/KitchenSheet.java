@@ -7,20 +7,27 @@ import businesslogic.procedure.Procedure;
 import businesslogic.procedure.Recipe;
 import businesslogic.turn.Turn;
 import businesslogic.user.User;
+import persistence.PersistenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class KitchenSheet {
+	private int id;
 	private String title;
 	private List<KitchenTask> kitchenTasks;
 	private ServiceInfo kitchenSheetService;
 
 	public KitchenSheet(String title, ServiceInfo service) {
+		id = 0;
 		this.title = title;
 		this.kitchenSheetService = service;
 		this.kitchenTasks = new ArrayList<>();
 
+		getTasksFromService(service);
+	}
+
+	private void getTasksFromService(ServiceInfo service) {
 		Menu menu = service.getUsedMenu();
 		List<Recipe> recipes = menu.getRecipes();
 		List<Procedure> procedures = Procedure.retrieveProceduresToPrepare(recipes);
@@ -31,11 +38,26 @@ public class KitchenSheet {
 		}
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public int getKitchenTaskPosition (KitchenTask task){
+		return this.kitchenTasks.indexOf(task);
+	}
 
 	public KitchenTask addKitchenTask(Procedure procedure){
 		KitchenTask task = new KitchenTask(procedure);
 		this.kitchenTasks.add(task);
-		procedure.addAssignedTask(task); //fixme: forse andrebbe tolto/modificato sempre per il discorso di responsabilità
+		procedure.addAssignedTask(task);
 		return task;
 	}
 
@@ -46,14 +68,7 @@ public class KitchenSheet {
 
 	public void restoreOriginalTask(){
 		this.kitchenTasks.clear();
-		Menu menu = this.kitchenSheetService.getUsedMenu();
-		List<Recipe> recipes = menu.getRecipes();
-		List<Procedure> procedures = Procedure.retrieveProceduresToPrepare(recipes);
-
-		for (Procedure proc : procedures) {
-			KitchenTask task = new KitchenTask(proc);
-			kitchenTasks.add(task);
-		}
+		getTasksFromService(this.kitchenSheetService);
 	}
 
 	public void moveTask(KitchenTask task, int position){
@@ -72,17 +87,49 @@ public class KitchenSheet {
 
 	// STATIC METHODS FOR PERSISTENCE
 	public static void saveNewSheet(KitchenSheet sheet) {
-		//TODO
+		String sheetInsert = "INSERT INTO catering.KitchenSheets (title, service_id) VALUES (" +
+				"'" + PersistenceManager.escapeString(sheet.title) + "', " +
+				sheet.kitchenSheetService.getId() +
+				");";
+		PersistenceManager.executeUpdate(sheetInsert);
+		sheet.id = PersistenceManager.getLastId();
+
+		for (KitchenTask task: sheet.kitchenTasks)
+			KitchenTask.addTask(sheet, task, sheet.getKitchenTaskPosition(task));
 	}
 
 	public static void restoreSheet(KitchenSheet sheet) {
-		//TODO
+		KitchenTask.deleteAllTasks(sheet);
+		KitchenTask.addAllTasks(sheet);
 	}
 
-	public static void saveTasksOrder(KitchenSheet sheet) {
-		//TODO
+	public static void saveTasksOrder(KitchenSheet sheet, KitchenTask task) {
+		for (int newPos = 0; newPos < sheet.kitchenTasks.size(); newPos++){
+			String changePosition = "UPDATE catering.KitchenTasks SET position = " + newPos + " WHERE id = " + sheet.kitchenTasks.get(newPos).getId();
+			PersistenceManager.executeUpdate(changePosition);
+		}
 	}
 
+	public static int getIdFromTitleAndServiceId(String title, int serviceId) {
+		final int[] result = {0};
+		String sheetIdFind = "SELECT id FROM catering.KitchenSheets WHERE title = '" + title + "' and service_id = "+serviceId;
+		PersistenceManager.executeQuery(sheetIdFind, rs -> {
+			int kitchenTaskId = rs.getInt("id");
+			result[0] = kitchenTaskId;
+		});
+		return result[0];
+	}
+
+	public static KitchenSheet loadSheetInfoByTitle(String title, ServiceInfo service) throws BusinessLogicException {
+		int idFromTitle = getIdFromTitleAndServiceId(title, service.getId());
+		if(idFromTitle <= 0) {
+			throw new BusinessLogicException("Il foglio con titolo: \""+ title+ "\" non esiste");
+		}
+		KitchenSheet sheet = new KitchenSheet(title, service);
+		sheet.id = idFromTitle;
+		sheet.kitchenTasks = KitchenTask.loadTasksFor(sheet.id);
+		return sheet;
+	}
 
 	public List<KitchenTask> getKitchenTasks() {
 		return kitchenTasks;

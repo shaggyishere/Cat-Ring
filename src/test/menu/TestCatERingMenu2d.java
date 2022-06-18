@@ -30,7 +30,7 @@ public class TestCatERingMenu2d {
             System.out.println(m.testString());
 
             System.out.println("\nTEST MOVE SECTION");
-            CatERing.getInstance().getMenuManager().moveSection(antipasti, 1);
+            CatERing.getInstance().getMenuManager().moveSection(antipasti, 0);
             CatERing.getInstance().getMenuManager().moveSection(secondi, 0);
             System.out.println(m.testString());
 

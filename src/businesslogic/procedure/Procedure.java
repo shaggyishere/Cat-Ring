@@ -6,12 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Procedure {
-	private List <KitchenTask> assignedInTasks;
+	private int id;
+	private List <KitchenTask> assignedInTasks; //fixme: non utilizzato in questo caso d'uso ma necessario per un controllo nell'UC delle ricette (eliminazione procedura)
 	private List <ProcedureIngredient> ingredients;
 
 	public Procedure() {
+		id = 0;
 		this.ingredients = new ArrayList<>();
 		this.assignedInTasks = new ArrayList<>();
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public List<ProcedureIngredient> getIngredients() {
