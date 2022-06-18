@@ -111,7 +111,7 @@ public class KitchenSheet {
 	}
 
 	public static int getIdFromTitleAndServiceId(String title, int serviceId) {
-		final int[] result = {0};
+		final int[] result = {-1};
 		String sheetIdFind = "SELECT id FROM catering.KitchenSheets WHERE title = '" + title + "' and service_id = "+serviceId;
 		PersistenceManager.executeQuery(sheetIdFind, rs -> {
 			int kitchenTaskId = rs.getInt("id");
@@ -122,7 +122,7 @@ public class KitchenSheet {
 
 	public static KitchenSheet loadSheetInfoByTitle(String title, ServiceInfo service) throws BusinessLogicException {
 		int idFromTitle = getIdFromTitleAndServiceId(title, service.getId());
-		if(idFromTitle <= 0) {
+		if(idFromTitle < 0) {
 			throw new BusinessLogicException("Il foglio con titolo: \""+ title+ "\" non esiste");
 		}
 		KitchenSheet sheet = new KitchenSheet(title, service);

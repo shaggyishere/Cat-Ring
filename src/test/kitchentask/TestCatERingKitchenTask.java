@@ -44,10 +44,10 @@ public class TestCatERingKitchenTask {
 
             System.out.println("\nTEST DELETE KITCHEN TASK");
             catERing.getKitchenTaskManager().deleteKitchenTask(prepareBigneFarciti);
-            catERing.getKitchenTaskManager().deleteKitchenTask(preparePizzette); //commentare per vedere che resta aggiunto nel db
+//            catERing.getKitchenTaskManager().deleteKitchenTask(preparePizzette); //commentare per vedere che resta aggiunto nel db
             catERing.getKitchenTaskManager().deleteKitchenTask(preparePaniniLatte);
 //			System.out.println("Foglio con tasks \"Panini al latte\", \"Bigne farciti\", \"Pizzette\" rimossi: "+sheet);
-//			System.out.println("Foglio con tasks \"Panini al latte\", \"Bigne farciti\" rimossi: "+sheet); //pizzette rimaste
+			System.out.println("Foglio con tasks \"Panini al latte\", \"Bigne farciti\" rimossi: "+sheet); //pizzette rimaste
 
             System.out.println("\nTEST MOVE KITCHEN TASK");
             int firstPosition = 0;

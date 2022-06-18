@@ -30,16 +30,17 @@ public class TestCatERingKitchenTask2b {
 
 			System.out.println("\nTEST ADD KITCHEN TASK");
 			List<Recipe> recipes = CatERing.getInstance().getProcedureManager().getRecipes();
-			KitchenTask prepareVitello = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(0));
-			KitchenTask prepareCarpaccio = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(1));
-			KitchenTask prepareAlici = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(2));
-			System.out.println("Foglio con nuovi tasks: \"Vitello tonnato\", \"Carpaccio di spada\", \"Alici marinate\"" + sheet);
+			KitchenTask preparePaniniLatte = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(11));
+			KitchenTask prepareBigneFarciti = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(14));
+			KitchenTask preparePizzette = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(15));
+			System.out.println("Foglio con nuovi tasks: \"Panini al latte\", \"Bigne farciti\", \"Pizzette\"" + sheet);
 
 			System.out.println("\nTEST DELETE KITCHEN TASK");
-			catERing.getKitchenTaskManager().deleteKitchenTask(prepareCarpaccio);
-			catERing.getKitchenTaskManager().deleteKitchenTask(prepareAlici);
-			catERing.getKitchenTaskManager().deleteKitchenTask(prepareVitello);
-			System.out.println("Foglio con tasks \"Vitello tonnato\", \"Carpaccio di spada\", \"Alici marinate\" rimossi: "+sheet);
+			catERing.getKitchenTaskManager().deleteKitchenTask(prepareBigneFarciti);
+//            catERing.getKitchenTaskManager().deleteKitchenTask(preparePizzette); //commentare per vedere che resta aggiunto nel db
+			catERing.getKitchenTaskManager().deleteKitchenTask(preparePaniniLatte);
+//			System.out.println("Foglio con tasks \"Panini al latte\", \"Bigne farciti\", \"Pizzette\" rimossi: "+sheet);
+			System.out.println("Foglio con tasks \"Panini al latte\", \"Bigne farciti\" rimossi: "+sheet); //pizzette rimaste
 
 
 			System.out.println("\nTEST RESTORE KITCHEN TASK");
