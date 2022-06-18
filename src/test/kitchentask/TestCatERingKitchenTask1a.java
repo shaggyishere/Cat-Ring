@@ -31,6 +31,7 @@ public class TestCatERingKitchenTask1a {
         try {
             System.out.println("\nTEST OPEN EXISTING SHEET");
             KitchenSheet sheetToOpen = new KitchenSheet("Primo foglio di prova", service);
+//            KitchenSheet sheetToOpen = new KitchenSheet("Pranzo di natale coi parenti", service); //foglio non presente nel db, lancerà un'eccezione
             KitchenSheet sheet = catERing.getKitchenTaskManager().chooseKitchenSheet(sheetToOpen, event, service);
             System.out.println("Foglio esistente per evento \""+ event.getName() +"\": " + sheet);
 
@@ -54,7 +55,7 @@ public class TestCatERingKitchenTask1a {
             System.out.println("\nTEST ASSIGN VALUES TO FIRST TASK");
             int marinellaID = 4;
             User cookMarinella = User.loadUserById(marinellaID);
-            Turn tuesdayAftnoonTurn = new Turn("Giovedi ore 16:00");
+            Turn tuesdayAftnoonTurn = new Turn("Martedi ore 09:00");
             cookMarinella.addAvailabilityFor(tuesdayAftnoonTurn);
             String timing = "50 minuti";
             String quantity = "6 porzioni";

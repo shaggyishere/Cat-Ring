@@ -38,16 +38,16 @@ public class TestCatERingKitchenTask {
 
 			System.out.println("\nTEST ADD KITCHEN TASK");
 			List<Recipe> recipes = CatERing.getInstance().getProcedureManager().getRecipes();
-			KitchenTask prepareVitello = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(0));
-			KitchenTask prepareCarpaccio = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(1));
-			KitchenTask prepareAlici = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(2));
-			System.out.println("Foglio con nuovi tasks: \"Vitello tonnato\", \"Carpaccio di spada\", \"Alici marinate\"" + sheet);
+			KitchenTask prepareGirelleUvetta = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(11));
+			KitchenTask prepareLingueGatto = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(14));
+			KitchenTask prepareBigneFarciti = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(15));
+			System.out.println("Foglio con nuovi tasks: \"Girelle all'uvetta\", \"Lingue di gatto\", \"Bigne farciti\"" + sheet);
 
 			System.out.println("\nTEST DELETE KITCHEN TASK");
-			catERing.getKitchenTaskManager().deleteKitchenTask(prepareCarpaccio);
-			catERing.getKitchenTaskManager().deleteKitchenTask(prepareAlici);
-			catERing.getKitchenTaskManager().deleteKitchenTask(prepareVitello);
-			System.out.println("Foglio con tasks \"Vitello tonnato\", \"Carpaccio di spada\", \"Alici marinate\" rimossi: "+sheet);
+			catERing.getKitchenTaskManager().deleteKitchenTask(prepareLingueGatto);
+			catERing.getKitchenTaskManager().deleteKitchenTask(prepareBigneFarciti);
+			catERing.getKitchenTaskManager().deleteKitchenTask(prepareGirelleUvetta);
+			System.out.println("Foglio con tasks \"Girelle all'uvetta\", \"Lingue di gatto\", \"Bigne farciti\" rimossi: "+sheet);
 
 			System.out.println("\nTEST MOVE KITCHEN TASK");
 			int firstPosition = 0;

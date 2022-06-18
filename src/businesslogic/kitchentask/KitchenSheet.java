@@ -11,7 +11,6 @@ import persistence.PersistenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class KitchenSheet {
 	private int id;
@@ -41,6 +40,10 @@ public class KitchenSheet {
 
 	public int getId() {
 		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -143,9 +146,15 @@ public class KitchenSheet {
 		return result[0];
 	}
 
-	public static KitchenSheet getSheetById(int id){
-		//TODO fetchare dati da db e creare oggetto sheet corrispondente (settare attributi)
-		return null;
+	public static KitchenSheet loadSheetInfoByTitle(String title, ServiceInfo service) throws BusinessLogicException {
+		int idFromTitle = getIdFromTitle(title);
+		if(idFromTitle <= 0) {
+			throw new BusinessLogicException("Il foglio con titolo: \""+ title+ "\" non esiste");
+		}
+		KitchenSheet sheet = new KitchenSheet(title, service);
+		sheet.id = idFromTitle;
+		sheet.kitchenTasks = KitchenTask.loadTasksFor(sheet.id);
+		return sheet;
 	}
 
 	public List<KitchenTask> getKitchenTasks() {

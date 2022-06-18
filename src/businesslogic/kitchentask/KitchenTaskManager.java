@@ -38,7 +38,7 @@ public class KitchenTaskManager {
 		return currentSheet;
 	}
 
-	public KitchenSheet chooseKitchenSheet(KitchenSheet sheet, EventInfo event, ServiceInfo service) throws UseCaseLogicException{
+	public KitchenSheet chooseKitchenSheet(KitchenSheet sheet, EventInfo event, ServiceInfo service) throws UseCaseLogicException, BusinessLogicException {
 		User user = CatERing.getInstance().getUserManager().getCurrentUser();
         if (!user.isChef() ||
                 !event.getServices().contains(service) ||
@@ -46,11 +46,10 @@ public class KitchenTaskManager {
                 service.getUsedMenu() == null) {
             throw new UseCaseLogicException();
         }
-		int idFromTitle = KitchenSheet.getIdFromTitle(sheet.getTitle());
-		KitchenSheet currentSheet = KitchenSheet.getSheetById(idFromTitle);
+		KitchenSheet currentSheet = KitchenSheet.loadSheetInfoByTitle(sheet.getTitle(), service);
 		this.setCurrentSheet(currentSheet);
 
-		return sheet;
+		return currentSheet;
 	}
 
 	public KitchenTask addKitchenTask (Procedure procedure) throws UseCaseLogicException {
