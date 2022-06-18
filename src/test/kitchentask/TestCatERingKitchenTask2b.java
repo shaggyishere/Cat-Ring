@@ -8,7 +8,6 @@ import businesslogic.event.ServiceInfo;
 import businesslogic.kitchentask.KitchenSheet;
 import businesslogic.kitchentask.KitchenTask;
 import businesslogic.procedure.Recipe;
-import javafx.collections.ObservableList;
 
 import java.util.List;
 

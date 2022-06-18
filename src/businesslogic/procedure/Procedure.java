@@ -7,7 +7,7 @@ import java.util.List;
 
 public abstract class Procedure {
 	private int id;
-	private List <KitchenTask> assignedInTasks;
+	private List <KitchenTask> assignedInTasks; //fixme: non utilizzato in questo caso d'uso ma necessario per un controllo nell'UC delle ricette (eliminazione procedura)
 	private List <ProcedureIngredient> ingredients;
 
 	public Procedure() {

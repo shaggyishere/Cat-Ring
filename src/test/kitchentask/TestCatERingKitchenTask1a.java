@@ -60,7 +60,7 @@ public class TestCatERingKitchenTask1a {
             String timing = "50 minuti";
             String quantity = "6 porzioni";
             firstTask = sheet.getKitchenTasks().get(firstPosition);
-            System.out.println(String.format("Assegniamo al primo task il cuoco: %s, nel turno: %s, con durata: %s e quantita': %s", cookMarinella.getUserName(), tuesdayAftnoonTurn.getWhen(), timing, quantity));
+            System.out.printf("Assegniamo al primo task il cuoco: %s, nel turno: %s, con durata: %s e quantita': %s%n", cookMarinella.getUserName(), tuesdayAftnoonTurn.getWhen(), timing, quantity);
             catERing.getKitchenTaskManager().assignTask(firstTask, tuesdayAftnoonTurn, cookMarinella, timing, quantity);
             System.out.println("Foglio con primo task assegnato: "+sheet);
 

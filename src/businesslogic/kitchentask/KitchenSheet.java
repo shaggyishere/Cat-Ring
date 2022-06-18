@@ -57,9 +57,7 @@ public class KitchenSheet {
 	public KitchenTask addKitchenTask(Procedure procedure){
 		KitchenTask task = new KitchenTask(procedure);
 		this.kitchenTasks.add(task);
-		procedure.addAssignedTask(task); //fixme: forse andrebbe tolto/modificato sempre per il discorso di responsabilità
-										 // DUBBIO: potresti avere ragione, ma chi lo deve fare? Qualcuno lo deve pur fare o no?
-										 // (cioè mi sembra l'avessimo messo per qualche operazione, ma ora non ricordo)
+		procedure.addAssignedTask(task);
 		return task;
 	}
 
@@ -112,9 +110,9 @@ public class KitchenSheet {
 		}
 	}
 
-	public static int getIdFromTitle(String title) {
+	public static int getIdFromTitleAndServiceId(String title, int serviceId) {
 		final int[] result = {0};
-		String sheetIdFind = "SELECT id FROM catering.KitchenSheets WHERE title = '" + title + "';";
+		String sheetIdFind = "SELECT id FROM catering.KitchenSheets WHERE title = '" + title + "' and service_id = "+serviceId;
 		PersistenceManager.executeQuery(sheetIdFind, rs -> {
 			int kitchenTaskId = rs.getInt("id");
 			result[0] = kitchenTaskId;
@@ -123,7 +121,7 @@ public class KitchenSheet {
 	}
 
 	public static KitchenSheet loadSheetInfoByTitle(String title, ServiceInfo service) throws BusinessLogicException {
-		int idFromTitle = getIdFromTitle(title);
+		int idFromTitle = getIdFromTitleAndServiceId(title, service.getId());
 		if(idFromTitle <= 0) {
 			throw new BusinessLogicException("Il foglio con titolo: \""+ title+ "\" non esiste");
 		}
