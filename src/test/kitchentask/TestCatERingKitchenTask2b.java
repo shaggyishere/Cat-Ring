@@ -1,5 +1,6 @@
 package test.kitchentask;
 
+import businesslogic.BusinessLogicException;
 import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
 import businesslogic.event.EventInfo;
@@ -49,6 +50,8 @@ public class TestCatERingKitchenTask2b {
 		} catch (UseCaseLogicException e) {
 			System.out.println("Errore di logica nello use case");
 
+		} catch (BusinessLogicException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 }

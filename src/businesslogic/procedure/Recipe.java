@@ -39,7 +39,7 @@ public class Recipe extends Procedure {
     // STATIC METHODS FOR PERSISTENCE
 
     public static ObservableList<Recipe> loadAllRecipes() {
-        String query = "SELECT * FROM Recipes";
+        String query = "SELECT * FROM Recipes ORDER BY id";
         PersistenceManager.executeQuery(query, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {

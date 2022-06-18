@@ -22,7 +22,8 @@ public class KitchenTaskManager {
 	}
 
 
-	public KitchenSheet createKitchenSheet(String title, EventInfo event, ServiceInfo service) throws UseCaseLogicException {
+	public KitchenSheet createKitchenSheet(String title, EventInfo event, ServiceInfo service) throws UseCaseLogicException, BusinessLogicException {
+		KitchenSheet sheet;
 		User user = CatERing.getInstance().getUserManager().getCurrentUser();
 
         if (!user.isChef() ||
@@ -31,9 +32,17 @@ public class KitchenTaskManager {
 				!user.getAssignedEvents().contains(event)) {
             throw new UseCaseLogicException();
         }
-		KitchenSheet sheet = new KitchenSheet(title, service);
+
+		//se il foglio già esiste verrà semplicemente restituito
+		if(KitchenSheet.getIdFromTitle(title) > 0) {
+			sheet = KitchenSheet.loadSheetInfoByTitle(title, service);
+		}
+		else {
+			sheet = new KitchenSheet(title, service);
+			this.notifySheetCreated(sheet);
+		}
+
 		this.setCurrentSheet(sheet);
-		this.notifySheetCreated(sheet);
 
 		return currentSheet;
 	}

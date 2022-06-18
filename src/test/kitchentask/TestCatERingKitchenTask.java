@@ -41,13 +41,13 @@ public class TestCatERingKitchenTask {
 			KitchenTask prepareGirelleUvetta = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(11));
 			KitchenTask prepareLingueGatto = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(14));
 			KitchenTask prepareBigneFarciti = catERing.getKitchenTaskManager().addKitchenTask(recipes.get(15));
-			System.out.println("Foglio con nuovi tasks: \"Girelle all'uvetta\", \"Lingue di gatto\", \"Bigne farciti\"" + sheet);
+			System.out.println("Foglio con nuovi tasks: \"Panini al latte\", \"Bigne farciti\", \"Pizzette\"" + sheet);
 
 			System.out.println("\nTEST DELETE KITCHEN TASK");
 			catERing.getKitchenTaskManager().deleteKitchenTask(prepareLingueGatto);
 			catERing.getKitchenTaskManager().deleteKitchenTask(prepareBigneFarciti);
 			catERing.getKitchenTaskManager().deleteKitchenTask(prepareGirelleUvetta);
-			System.out.println("Foglio con tasks \"Girelle all'uvetta\", \"Lingue di gatto\", \"Bigne farciti\" rimossi: "+sheet);
+			System.out.println("Foglio con tasks \"Panini al latte\", \"Bigne farciti\", \"Pizzette\" rimossi: "+sheet);
 
 			System.out.println("\nTEST MOVE KITCHEN TASK");
 			int firstPosition = 0;

@@ -88,40 +88,16 @@ public class KitchenSheet {
 
 
 	// STATIC METHODS FOR PERSISTENCE
-
-	/**
-	 * If there is already a sheet with that service_id the method communicates it to the user
-	 * and opens the existing one by setting the correct id (ignoring the title parameter).
-	 * Otherwise the method creates a new one; in this case it also creates a kitchenTask for each procedures in service.
-	 */
 	public static void saveNewSheet(KitchenSheet sheet) {
-		String sheetIdFind = "SELECT id FROM catering.KitchenSheets WHERE service_id = " + sheet.kitchenSheetService.getId() + ";";
-		PersistenceManager.executeQuery(sheetIdFind, rs -> sheet.id = rs.getInt("id"));
-		if (sheet.id == 0) {
-			String sheetInsert = "INSERT INTO catering.KitchenSheets (title, service_id) VALUES (" +
-					"'" + PersistenceManager.escapeString(sheet.title) + "', " +
-					sheet.kitchenSheetService.getId() +
-					");";
-			PersistenceManager.executeUpdate(sheetInsert);
-			sheet.id = PersistenceManager.getLastId();
+		String sheetInsert = "INSERT INTO catering.KitchenSheets (title, service_id) VALUES (" +
+				"'" + PersistenceManager.escapeString(sheet.title) + "', " +
+				sheet.kitchenSheetService.getId() +
+				");";
+		PersistenceManager.executeUpdate(sheetInsert);
+		sheet.id = PersistenceManager.getLastId();
 
-			for (KitchenTask task: sheet.kitchenTasks)
-				KitchenTask.addTask(sheet, task, sheet.getKitchenTaskPosition(task));
-		}
-		else {
-			System.out.println("!!!!!!The KitchenSheet associated with this service already exists, I set it as the currentSheet!!!!!!");
-			List<Integer> allTasksId = new ArrayList<>();
-			String taskIdFind = "SELECT id FROM catering.KitchenTasks WHERE kitchensheet_id = " + sheet.getId() + ";";
-			PersistenceManager.executeQuery(taskIdFind, rs -> {
-				int kitchenTaskId = rs.getInt("id");
-				allTasksId.add(kitchenTaskId);
-			});
-//			System.out.println(allTasksId);
-//			System.out.println(sheet.kitchenTasks);
-
-			for (int pos = 0; pos < allTasksId.size(); pos++)
-				sheet.kitchenTasks.get(pos).setId(allTasksId.get(pos));
-		}
+		for (KitchenTask task: sheet.kitchenTasks)
+			KitchenTask.addTask(sheet, task, sheet.getKitchenTaskPosition(task));
 	}
 
 	public static void restoreSheet(KitchenSheet sheet) {
