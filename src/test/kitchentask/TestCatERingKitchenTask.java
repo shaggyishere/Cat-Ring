@@ -33,7 +33,7 @@ public class TestCatERingKitchenTask {
         try {
             System.out.println("\nTEST CREATE SHEET");
             KitchenSheet sheet = catERing.getKitchenTaskManager().createKitchenSheet("Primo foglio di prova", event, service);
-            System.out.println("Foglio autogenerato per evento \"" + event.getName() + "\": " + sheet);
+            System.out.println("Foglio autogenerato per servizio \"" + service.getName() + "\" associato all'evento \"" + event.getName() + "\": " + sheet);
 
             System.out.println("\nTEST ADD KITCHEN TASK");
             List<Recipe> recipes = CatERing.getInstance().getProcedureManager().getRecipes();

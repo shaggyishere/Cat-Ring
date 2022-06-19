@@ -36,6 +36,8 @@ public class KitchenTaskManager {
         //se un foglio con lo stesso nome e servizio già esiste verrà semplicemente restituito
         if (KitchenSheet.getIdFromTitleAndServiceId(title, service.getId()) >= 0) {
             sheet = KitchenSheet.loadSheetInfoByTitle(title, service);
+        } else if (KitchenSheet.getIdFromServiceId(service.getId()) >= 0) {
+            throw new BusinessLogicException("Esiste già un foglio associato al servizio \"" + service.getName() + "\", ma con titolo diverso.");
         } else {
             sheet = new KitchenSheet(title, service);
             this.notifySheetCreated(sheet);

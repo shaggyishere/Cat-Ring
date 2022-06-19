@@ -33,8 +33,8 @@ public class TestCatERingKitchenTask1a {
             KitchenSheet sheetToOpen = new KitchenSheet("Primo foglio di prova", service);
 //            KitchenSheet sheetToOpen = new KitchenSheet("Pranzo di natale coi parenti", service); //foglio non presente nel db, lancerà un'eccezione
             KitchenSheet sheet = catERing.getKitchenTaskManager().chooseKitchenSheet(sheetToOpen, event, service);
-            System.out.println("Foglio esistente per evento \""+ event.getName() +"\": " + sheet);
-
+            System.out.println("Foglio esistente per servizio \"" + service.getName() + "\" associato all'evento \"" + event.getName() +"\": " + sheet);
+            
             System.out.println("\nTEST ADD KITCHEN TASK");
             KitchenTask prepareSpaghetti = catERing.getKitchenTaskManager().addKitchenTask(new Recipe("spaghetti"));
             System.out.println("Foglio con nuovo task \"spaghetti\": "+sheet);

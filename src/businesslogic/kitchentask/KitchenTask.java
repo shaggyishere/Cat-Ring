@@ -34,7 +34,6 @@ public class KitchenTask {
 
     // STATIC METHODS FOR PERSISTENCE
     public static void addTask(KitchenSheet sheet, KitchenTask taskToAdd, int posInKitchenSheet) {
-//		System.out.println(taskToAdd);
         String secInsert = "INSERT INTO catering.KitchenTasks (completed, kitchensheet_id, procedures_id, position) VALUES (" +
                 taskToAdd.isCompleted() + ", " +
                 sheet.getId() + ", " +

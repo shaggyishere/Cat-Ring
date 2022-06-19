@@ -27,6 +27,7 @@ public class KitchenSheet {
 		getTasksFromService(service);
 	}
 
+
 	private void getTasksFromService(ServiceInfo service) {
 		Menu menu = service.getUsedMenu();
 		List<Recipe> recipes = menu.getRecipes();
@@ -112,13 +113,24 @@ public class KitchenSheet {
 
 	public static int getIdFromTitleAndServiceId(String title, int serviceId) {
 		final int[] result = {-1};
-		String sheetIdFind = "SELECT id FROM catering.KitchenSheets WHERE title = '" + title + "' and service_id = "+serviceId;
+		String sheetIdFind = "SELECT id FROM catering.KitchenSheets WHERE title = '" + title + "' and service_id = " + serviceId;
 		PersistenceManager.executeQuery(sheetIdFind, rs -> {
 			int kitchenTaskId = rs.getInt("id");
 			result[0] = kitchenTaskId;
 		});
 		return result[0];
 	}
+
+	public static int getIdFromServiceId(int serviceId) {
+		final int[] result = {-1};
+		String sheetIdFind = "SELECT id FROM catering.KitchenSheets WHERE service_id = " + serviceId;
+		PersistenceManager.executeQuery(sheetIdFind, rs -> {
+			int kitchenTaskId = rs.getInt("id");
+			result[0] = kitchenTaskId;
+		});
+		return result[0];
+	}
+
 
 	public static KitchenSheet loadSheetInfoByTitle(String title, ServiceInfo service) throws BusinessLogicException {
 		int idFromTitle = getIdFromTitleAndServiceId(title, service.getId());
